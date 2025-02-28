@@ -222,6 +222,24 @@
             position: relative;
         }
 
+        /* Garantizar contraste en el footer */
+        footer a {
+            color: white !important;
+            text-decoration: underline;
+        }
+
+        footer a:hover,
+        footer a:focus {
+            color: white !important;
+            text-decoration: underline;
+            opacity: 0.9;
+        }
+
+        /* Asegurar que las clases text-white-50 no afecten a los enlaces del footer */
+        footer .text-white-50 {
+            color: white !important;
+        }
+
         footer h3 {
             position: relative;
             padding-bottom: 1rem;
@@ -683,65 +701,78 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="mt-5 pt-5">
+    <!-- Footer completo con contraste mejorado -->
+    <footer class="mt-5 pt-5" aria-labelledby="footer-heading">
         <div class="container">
+            <h2 id="footer-heading" class="visually-hidden">Informació del lloc web i contacte</h2>
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
                     <h3 class="h4">CinemaViu</h3>
                     <p>Associació Valenciana de Cinema que promou i dona suport al cinema en valencià a tota la
                         Comunitat.</p>
-                    <div class="social-icons">
-                        <a href="#" class="btn"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="btn"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="btn"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="btn"><i class="bi bi-youtube"></i></a>
+                    <div class="social-icons" aria-label="Xarxes socials">
+                        <a href="#" class="btn" aria-label="Facebook">
+                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="Twitter">
+                            <i class="bi bi-twitter-x" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="Instagram">
+                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="YouTube">
+                            <i class="bi bi-youtube" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="h4">Enllaços ràpids</h3>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><a href="./index.html" class="text-white text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>Inici
-                            </a></li>
-                        <li class="mb-3"><a href="./ranquin.html" class="text-white text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>Rànquing pel·lícules
-                            </a></li>
-                        <li class="mb-3"><a href="./professionals.html" class="text-white text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>Professionals
-                            </a></li>
-                        <li class="mb-3"><a href="./soci.html" class="text-white text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>Ser soci
-                            </a></li>
-                        <li><a href="diw.html" class="text-white text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>DIW
-                            </a></li>
-                    </ul>
+                    <nav aria-label="Enllaços ràpids del peu de pàgina">
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><a href="./index.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Inici
+                                </a></li>
+                            <li class="mb-3"><a href="./ranquin.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Rànquing pel·lícules
+                                </a></li>
+                            <li class="mb-3"><a href="./professionals.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Professionals
+                                </a></li>
+                            <li class="mb-3"><a href="./soci.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Ser soci
+                                </a></li>
+                            <li><a href="diw.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>DIW
+                                </a></li>
+                        </ul>
+                    </nav>
                 </div>
 
                 <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
                     <h3 class="h4">Contacte</h3>
                     <ul class="list-unstyled">
                         <li class="mb-3 d-flex align-items-center">
-                            <i class="bi bi-geo-alt me-3 "></i>
+                            <i class="bi bi-geo-alt me-3" aria-hidden="true"></i>
                             <span>Carrer del Cinema, 123, València</span>
                         </li>
                         <li class="mb-3 d-flex align-items-center">
-                            <i class="bi bi-envelope me-3 "></i>
-                            <span>info@cinemaviu.val</span>
+                            <i class="bi bi-envelope me-3" aria-hidden="true"></i>
+                            <a href="mailto:info@cinemaviu.val" class="text-white">info@cinemaviu.val</a>
                         </li>
                         <li class="mb-3 d-flex align-items-center">
-                            <i class="bi bi-telephone me-3 "></i>
-                            <span>(34) 963 123 456</span>
+                            <i class="bi bi-telephone me-3" aria-hidden="true"></i>
+                            <a href="tel:+34963123456" class="text-white">(34) 963 123 456</a>
                         </li>
                     </ul>
                     <!-- Mini formulario de contacto rápido -->
                     <div class="mt-4">
+                        <label for="quick-message" class="form-label visually-hidden">Missatge ràpid</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Missatge ràpid">
-                            <button class="btn btn-primary" type="button">
-                                <i class="bi bi-send"></i>
+                            <input type="text" class="form-control" id="quick-message" placeholder="Missatge ràpid"
+                                aria-label="Missatge ràpid">
+                            <button class="btn btn-light" type="button" aria-label="Enviar missatge">
+                                <i class="bi bi-send" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -754,7 +785,6 @@
                 <div class="col-md-6 text-center text-md-start">
                     <p class="mb-0">&copy; 2024 Associació Valenciana de Cinema. Tots els drets reservats.</p>
                 </div>
-                <!-- Enlaces del footer con contraste mejorado -->
                 <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
@@ -777,6 +807,10 @@
             </div>
         </div>
     </footer>
+
+
+
+
 
     <!-- Botón Volver Arriba -->
     <a href="#"
