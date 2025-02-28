@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fes-te soci - CinemaViu</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Paleta de rojos */
+            --primary: #e03131;
+            --primary-dark: #c92a2a;
+            --primary-light: #ff6b6b;
+            --secondary: #ffdeeb;
+            --accent: #ff8787;
+
+            /* Configuración de Bootstrap */
+            --bs-primary-rgb: 224, 49, 49;
+            --bs-primary: var(--primary);
+            --bs-primary-hover: var(--primary-dark);
+
+            /* Redefiniendo colores Bootstrap adicionales */
+            --bs-link-color: var(--primary);
+            --bs-link-hover-color: var(--primary-dark);
+            --bs-btn-hover-border-color: var(--primary-dark);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #ffffff 0%, #fff5f5 25%, #ffc9c9 75%, #ff8787 100%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        /* Breadcrumb styling */
+        .breadcrumb-item a {
+            color: var(--primary) !important;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--primary-dark) !important;
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--primary-dark);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(201, 42, 42, 0.9);
+        }
+
+        .navbar-brand {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .navbar-dark .navbar-brand {
+            color: #fff;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        .navbar-dark .nav-link:hover,
+        .navbar-dark .nav-link.active {
+            color: #fff !important;
+        }
+
+        /* Soci header */
+        .soci-header {
+            background-color: var(--primary);
+            border-radius: 1rem;
+            margin: 0 1rem;
+            background-image: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: 0 5px 15px rgba(224, 49, 49, 0.2);
+        }
+
+        /* Form & Cards Styling */
+        .form-card, .benefits-card, .testimonial-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-card:hover, .benefits-card:hover {
+            box-shadow: 0 8px 25px rgba(224, 49, 49, 0.15);
+        }
+
+        .testimonial-card {
+            padding: 1.5rem;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(224, 49, 49, 0.15);
+        }
+
+        .card-header {
+            background-color: #fff;
+            border-bottom: 2px solid #f8f9fa;
+            padding: 1.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Benefits list */
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .benefits-list li i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .benefits-list li h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .benefits-list li p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        /* Testimonials */
+        .testimonial-quote {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-quote i {
+            color: var(--primary-light);
+            font-size: 1.5rem;
+            opacity: 0.5;
+            position: absolute;
+            top: -10px;
+            left: -5px;
+        }
+
+        .testimonial-quote p {
+            position: relative;
+            padding-left: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--primary-light);
+        }
+
+        .testimonial-author h4 {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        .testimonial-author span {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* Custom Range */
+        .range-container {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+
+        .range-labels span {
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+
+        .custom-range::-webkit-slider-thumb {
+            background: var(--primary);
+        }
+
+        .custom-range::-moz-range-thumb {
+            background: var(--primary);
+        }
+
+        .custom-range::-ms-thumb {
+            background: var(--primary);
+        }
+
+        /* Price options */
+        .price-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+
+        .price-option {
+            flex: 1;
+            text-align: center;
+        }
+
+        .price-option input[type="radio"]:checked + label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Accordion */
+        .accordion-button:not(.collapsed) {
+            background-color: #fff5f5;
+            color: var(--primary);
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+        }
+
+        .accordion-button:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 0.25rem rgba(224, 49, 49, 0.25);
+        }
+
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e03131'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .social-icons .btn {
+            color: white;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons .btn:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background-color: rgba(255, 255, 255, 0.95);
+                border-radius: 1rem;
+                padding: 1rem;
+                margin-top: 0.5rem;
+                box-shadow: 0 5px 15px rgba(224, 49, 49, 0.1);
+            }
+
+            .navbar-dark .navbar-collapse {
+                background-color: rgba(201, 42, 42, 0.95);
+            }
+            
+            .soci-header {
+                margin: 0 0.5rem;
+            }
+            
+            .benefits-card {
+                position: static !important;
+                top: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="./index.html" data-aos="fade-right"
+                data-aos-duration="1000">
+                <img src="./img/logo.webp" alt="Logo de l'Associació Valenciana de Cinema" height="40" class="me-2">
+                CinemaViu
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100">
+                        <a class="nav-link" href="./index.html">Inici</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="200">
+                        <a class="nav-link" href="./ranquin.html">Rànquing pel·lícules</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="300">
+                        <a class="nav-link" href="index.html#estrenos">Últimes pel·lícules</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
+                        <a class="nav-link" href="./professionals.html">Professionals</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="500">
+                        <a class="nav-link active" href="./soci.html">Fes-te soci</a>
+                    </li>
+                </ul>
+                <button class="btn btn-primary ms-lg-3 shadow-sm" data-aos="fade-left" data-aos-delay="600"
+                    onclick="window.location.href='#formularis'">
+                    <i class="bi bi-person-circle me-2"></i>Accedir
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container mt-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./index.html">Inici</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Fes-te soci</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Header sección -->
+    <header class="soci-header text-center text-white py-5 mb-4" data-aos="fade-up">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">Uneix-te a CinemaViu</h1>
+            <p class="lead mb-4">Forma part de la comunitat cinematogràfica valenciana i gaudeix de beneficis exclusius</p>
+        </div>
+    </header>
+
+    <!-- Sección principal -->
+    <section class="py-4" data-aos="fade-up">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <!-- Columna de formulario -->
+                        <div class="col-lg-8">
+                            <div class="form-card">
+                                <div class="card-header">
+                                    <h2 class="text-primary">Fes-te soci</h2>
+                                    <p>Omple el formulari següent per començar a gaudir de tots els avantatges</p>
+                                </div>
+                                <div class="card-body">
+                                    <form action="#" method="post" id="sociForm" class="needs-validation" novalidate>
+                                        <div class="row g-4">
+                                            <!-- Nombre -->
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="nom" name="nom" required autofocus>
+                                                    <label for="nom">El meu nom és</label>
+                                                    <div class="invalid-feedback">
+                                                        Si us plau, introduïu el vostre nom.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Email -->
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="email" class="form-control" id="email" name="email" required 
+                                                        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$">
+                                                    <label for="email">El meu correu electrònic</label>
+                                                    <div class="invalid-feedback">
+                                                        Si us plau, introduïu un correu vàlid.
+                                                    </div>
+                                                    <div class="form-text">Pots introduir diversos correus separats per comes.</div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Web -->
+                                            <div class="col-12">
+                                                <div class="form-floating mb-3">
+                                                    <input type="url" class="form-control" id="url" name="url">
+                                                    <label for="url">La meva adreça web és</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Contraseña -->
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="password" class="form-control" id="contrasenya1" name="contrasenya1" 
+                                                        required pattern="^(?=.*\\S).{6,}$">
+                                                    <label for="contrasenya1">Contrasenya</label>
+                                                    <div class="invalid-feedback">
+                                                        Ha de contenir almenys 6 caràcters sense espais.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Repetir contraseña -->
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="password" class="form-control" id="contrasenya2" name="contrasenya2" 
+                                                        required pattern="^(?=.*\\S).{6,}$">
+                                                    <label for="contrasenya2">Repeteix la contrasenya</label>
+                                                    <div class="invalid-feedback">
+                                                        Les contrasenyes han de coincidir.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Nivel de conocimiento -->
+                                            <div class="col-12">
+                                                <label for="coneixements" class="form-label">Del 1 al 10, quin és el teu coneixement sobre cinema en valencià?</label>
+                                                <div class="range-container">
+                                                    <input type="range" class="form-range custom-range" id="coneixements" name="coneixements" min="1" max="10" value="5">
+                                                    <div class="range-labels">
+                                                        <span>1</span>
+                                                        <span>2</span>
+                                                        <span>3</span>
+                                                        <span>4</span>
+                                                        <span>5</span>
+                                                        <span>6</span>
+                                                        <span>7</span>
+                                                        <span>8</span>
+                                                        <span>9</span>
+                                                        <span>10</span>
+                                                    </div>
+                                                </div>
+                                                <div class="range-value text-center mt-2">
+                                                    Nivell seleccionat: <span id="rangeValue">5</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Fecha inicio -->
+                                            <div class="col-md-6">
+                                                <label for="dataInici" class="form-label">Per favor, inicia la meua subscripció el dia:</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                                                    <input type="date" class="form-control" id="dataInici" name="dataInici">
+                                                </div>
+                                            </div>
+
+                                            <!-- Precio suscripción -->
+                                            <div class="col-md-6">
+                                                <label for="quantitat" class="form-label">Preu de la suscripció</label>
+                                                <div class="price-options">
+                                                    <div class="form-check form-check-inline price-option">
+                                                        <input class="form-check-input" type="radio" name="quantitat" id="price5" value="5" checked>
+                                                        <label class="form-check-label" for="price5">5€</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline price-option">
+                                                        <input class="form-check-input" type="radio" name="quantitat" id="price10" value="10">
+                                                        <label class="form-check-label" for="price10">10€</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline price-option">
+                                                        <input class="form-check-input" type="radio" name="quantitat" id="price15" value="15">
+                                                        <label class="form-check-label" for="price15">15€</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline price-option">
+                                                        <input class="form-check-input" type="radio" name="quantitat" id="price20" value="20">
+                                                        <label class="form-check-label" for="price20">20€</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Checkbox noticias -->
+                                            <div class="col-12">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="noticias" name="noticias">
+                                                    <label class="form-check-label" for="noticias">
+                                                        M'agradaria rebre notícies en el meu correu electrònic
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Política de privacidad -->
+                                            <div class="col-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="privacitat" name="privacitat" required>
+                                                    <label class="form-check-label" for="privacitat">
+                                                        He llegit i accepte la <a href="#">Política de Privacitat</a> i els <a href="#">Termes d'Ús</a>
+                                                    </label>
+                                                    <div class="invalid-feedback">
+                                                        Cal acceptar la política de privacitat per a continuar.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Botón enviar -->
+                                            <div class="col-12 text-center mt-4">
+                                                <button type="submit" class="btn btn-primary btn-lg px-5 py-3 shadow">
+                                                    <i class="bi bi-check-circle-fill me-2"></i>Fes-me soci
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna de beneficios -->
+                        <div class="col-lg-4 mt-4 mt-lg-0">
+                            <div class="benefits-card sticky-lg-top" style="top: 100px;">
+                                <div class="card-header">
+                                    <h3 class="text-primary">Beneficis de ser soci</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="benefits-list">
+                                        <li>
+                                            <i class="bi bi-ticket-perforated"></i>
+                                            <div>
+                                                <h4>Entrades a preu reduït</h4>
+                                                <p>Descomptes en totes les sales adherides a CinemaViu.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-calendar-event"></i>
+                                            <div>
+                                                <h4>Esdeveniments exclusius</h4>
+                                                <p>Accés a estrenes, col·loquis i trobades amb cineastes.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-film"></i>
+                                            <div>
+                                                <h4>Filmoteca digital</h4>
+                                                <p>Accés a la nostra col·lecció de cinema valencià en línia.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-people"></i>
+                                            <div>
+                                                <h4>Comunitat</h4>
+                                                <p>Forma part d'una xarxa de professionals i aficionats al cinema.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-book"></i>
+                                            <div>
+                                                <h4>Formació</h4>
+                                                <p>Tallers i cursos especialitzats amb preus especials.</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="text-center mt-4">
+                                        <a href="#" class="btn btn-outline-primary">
+                                            <i class="bi bi-info-circle me-2"></i>Més informació
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-light rounded-4 mx-3 shadow-sm" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-primary text-center mb-5">Què diuen els nostres socis</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            <i class="bi bi-quote"></i>
+                            <p>Ser soci de CinemaViu m'ha obert les portes a un món de cinema valencià que desconeixia. Els esdeveniments i projeccions són una passada!</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div>
+                                <h4>Marta Ferrer</h4>
+                                <span>Sòcia des de 2022</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            <i class="bi bi-quote"></i>
+                            <p>Com a cineasta novell, la xarxa de contactes i les oportunitats que m'ha brindat CinemaViu han sigut fonamentals per a la meua carrera.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div>
+                                <h4>Vicent Martí</h4>
+                                <span>Director de cinema</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            <i class="bi bi-quote"></i>
+                            <p>Els descomptes i la programació exclusiva valen la pena, però el millor és la comunitat que s'ha creat al voltant del cinema en valencià.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div>
+                                <h4>Laura Tomàs</h4>
+                                <span>Aficionada al cinema</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-primary text-center mb-5">Preguntes freqüents</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion shadow-sm rounded-4 overflow-hidden" id="accordionFAQ">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Com puc accedir als descomptes en entrades de cinema?
+                                </button>
+                            </h3>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body">
+                                    Una vegada registrat, rebràs un carnet digital que podràs mostrar a les taquilles de les sales 
+                                    adherides. També pots vincular el teu compte amb les apps de les principals cadenes de cinema 
+                                    per obtenir descomptes en compres online.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Quines sales de cinema estan adherides a CinemaViu?
+                                </button>
+                            </h3>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body">
+                                    Actualment, més de 30 sales a tota la Comunitat Valenciana estan adherides a CinemaViu, 
+                                    incloent les principals cadenes i cinemes independents. Pots consultar el llistat complet 
+                                    en la secció "Sales adherides" de la nostra web.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
+                    <h3 class="h4">CinemaViu</h3>
+                    <p>Associació Valenciana de Cinema que promou i dona suport al cinema en valencià a tota la
+                        Comunitat.</p>
+                    <div class="social-icons">
+                        <a href="#" class="btn"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="btn"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="btn"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="h4">Enllaços ràpids</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="./index.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>Inici
+                            </a></li>
+                        <li class="mb-3"><a href="./ranquin.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>Rànquing pel·lícules
+                            </a></li>
+                        <li class="mb-3"><a href="./professionals.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>Professionals
+                            </a></li>
+                        <li class="mb-3"><a href="./soci.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>Ser soci
+                            </a></li>
+                        <li><a href="diw.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>DIW
+                            </a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
+                    <h3 class="h4">Contacte</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-geo-alt me-3 text-primary-light"></i>
+                            <span>Carrer del Cinema, 123, València</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-envelope me-3 text-primary-light"></i>
+                            <span>info@cinemaviu.val</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-telephone me-3 text-primary-light"></i>
+                            <span>(34) 963 123 456</span>
+                        </li>
+                    </ul>
+                    <!-- Mini formulario de contacto rápido -->
+                    <div class="mt-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Missatge ràpid">
+                            <button class="btn btn-primary" type="button">
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-5 mb-4 bg-light opacity-25">
+
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 Associació Valenciana de Cinema. Tots els drets reservats.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"
+                                class="text-white-50 text-decoration-none small">Política de Privacitat</a></li>
+                        <li class="list-inline-item mx-3"><a href="#"
+                                class="text-white-50 text-decoration-none small">Termes d'Ús</a></li>
+                        <li class="list-inline-item"><a href="#"
+                                class="text-white-50 text-decoration-none small">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Volver Arriba -->
+    <a href="#"
+        class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 d-flex align-items-center justify-content-center shadow"
+        id="backToTop"
+        style="width: 45px; height: 45px; z-index: 1030; opacity: 0; visibility: hidden; transition: all 0.3s ease;">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        // Inicializar AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Cambiar navbar al hacer scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled', 'navbar-dark');
+                navbar.classList.remove('navbar-light');
+            } else {
+                navbar.classList.remove('scrolled', 'navbar-dark');
+                navbar.classList.add('navbar-light');
+            }
+
+            // Mostrar/ocultar botón volver arriba
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.style.opacity = '1';
+                backToTop.style.visibility = 'visible';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.visibility = 'hidden';
+            }
+        });
+
+        // Inicializar tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Actualizar valor del rango
+        const rangeInput = document.getElementById('coneixements');
+        const rangeValue = document.getElementById('rangeValue');
+        
+        rangeInput.addEventListener('input', function() {
+            rangeValue.textContent = this.value;
+        });
+
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                if (this.getAttribute('href') === '#') return;
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Funcionalidad para el botón de volver arriba
+        document.getElementById('backToTop').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Validación de formulario
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        // Check if passwords match
+                        const password1 = document.getElementById('contrasenya1');
+                        const password2 = document.getElementById('contrasenya2');
+                        
+                        if (password1.value !== password2.value) {
+                            password2.setCustomValidity('Les contrasenyes no coincideixen');
+                        } else {
+                            password2.setCustomValidity('');
+                        }
+                        
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+
+</html>

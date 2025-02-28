@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directori de Professionals - CinemaViu</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- CSS mínimo personalizado -->
+    <style>
+        :root {
+            /* Paleta de rojos */
+            --primary: #e03131;
+            --primary-dark: #c92a2a;
+            --primary-light: #ff6b6b;
+            --secondary: #ffdeeb;
+            --accent: #ff8787;
+
+            /* Configuración de Bootstrap */
+            --bs-primary-rgb: 224, 49, 49;
+            --bs-primary: var(--primary);
+            --bs-primary-hover: var(--primary-dark);
+
+            /* Redefiniendo colores Bootstrap adicionales */
+            --bs-link-color: var(--primary);
+            --bs-link-hover-color: var(--primary-dark);
+            --bs-btn-hover-border-color: var(--primary-dark);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #ffffff 0%, #fff5f5 25%, #ffc9c9 75%, #ff8787 100%);
+            background-attachment: fixed;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(201, 42, 42, 0.9);
+        }
+
+        .navbar-brand {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .navbar-dark .navbar-brand {
+            color: #fff;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        .navbar-dark .nav-link:hover,
+        .navbar-dark .nav-link.active {
+            color: #fff !important;
+        }
+
+        /* Header */
+        .professionals-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 5rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        /* Pocos estilos personalizados para las tarjetas de profesionales */
+        .professional-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        .professional-availability {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .available {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .partial {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .busy {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #f8f9fa;
+            color: #495057;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-link {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #c92a2a;
+            color: white;
+            padding-top: 5rem;
+            margin-top: 5rem;
+            position: relative;
+        }
+
+        footer h3 {
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        footer h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .social-icons .btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary) !important;
+            /* Use the primary red color variable */
+            text-decoration: none;
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--primary-dark) !important;
+            /* Darker red on hover */
+            text-decoration: underline;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--primary-dark);
+            /* Active item also in red */
+        }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background-color: rgba(255, 255, 255, 0.95);
+                border-radius: 1rem;
+                padding: 1rem;
+                margin-top: 0.5rem;
+                box-shadow: 0 5px 15px rgba(224, 49, 49, 0.1);
+            }
+
+            .navbar-dark .navbar-collapse {
+                background-color: rgba(201, 42, 42, 0.95);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="./index.html" data-aos="fade-right"
+                data-aos-duration="1000">
+                <img src="./img/logo.webp" alt="Logo de l'Associació Valenciana de Cinema" height="40" class="me-2">
+                CinemaViu
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100">
+                        <a class="nav-link" href="./index.html">Inici</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="200">
+                        <a class="nav-link" href="./ranquin.html">Rànquing pel·lícules</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="300">
+                        <a class="nav-link active" href="./professionals.html">Professionals</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
+                        <a class="nav-link" href="./soci.html">Fes-te soci</a>
+                    </li>
+                </ul>
+                <button class="btn btn-primary ms-lg-3 shadow-sm" data-aos="fade-left" data-aos-delay="500"
+                    onclick="window.location.href='#formularis'">
+                    <i class="bi bi-person-circle me-2"></i>Accedir
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container mt-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./index.html">Inici</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Directori de Professionals</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="professionals-header text-center text-white py-5" data-aos="fade-up">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">Directori de Professionals</h1>
+            <p class="lead mb-4">Connecta amb el millor talent cinematogràfic valencià</p>
+            <div class="d-flex justify-content-center">
+                <a href="#filters" class="btn btn-light btn-lg px-4 me-2">
+                    <i class="bi bi-search me-2"></i>Cerca professionals
+                </a>
+                <a href="#" class="btn btn-outline-light btn-lg px-4">
+                    <i class="bi bi-person-plus me-2"></i>Registra't com a professional
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filtros interactivos -->
+    <section class="py-5 bg-light rounded-4 shadow my-4" id="filters" data-aos="fade-up">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card border-0 shadow">
+                        <div class="card-body p-4">
+                            <h2 class="card-title text-center mb-4">Filtres de Cerca</h2>
+                            <form id="filterForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="categoryFilter">
+                                                <option value="" selected>Tots</option>
+                                                <option value="director">Directors/es</option>
+                                                <option value="actor">Actors/Actrius</option>
+                                                <option value="fotografia">Direcció de Fotografia</option>
+                                                <option value="sound">So</option>
+                                                <option value="montaje">Muntatge</option>
+                                                <option value="produccion">Producció</option>
+                                                <option value="guion">Guió</option>
+                                            </select>
+                                            <label for="categoryFilter">Categoria</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="specialtyFilter">
+                                                <option value="" selected>Totes</option>
+                                                <option value="ficcion">Ficció</option>
+                                                <option value="documental">Documental</option>
+                                                <option value="animacion">Animació</option>
+                                                <option value="experimental">Experimental</option>
+                                                <option value="comercial">Comercial</option>
+                                            </select>
+                                            <label for="specialtyFilter">Especialitat</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="experienceFilter">
+                                                <option value="" selected>Totes</option>
+                                                <option value="junior">Junior (0-3 anys)</option>
+                                                <option value="mid">Mitjana (3-7 anys)</option>
+                                                <option value="senior">Sènior (7+ anys)</option>
+                                            </select>
+                                            <label for="experienceFilter">Experiència</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="availabilityFilter">
+                                                <option value="" selected>Totes</option>
+                                                <option value="immediate">Disponibilitat Immediata</option>
+                                                <option value="partial">Disponibilitat Parcial</option>
+                                                <option value="project">En Projecte</option>
+                                            </select>
+                                            <label for="availabilityFilter">Disponibilitat</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white border-end-0">
+                                                <i class="bi bi-search text-primary"></i>
+                                            </span>
+                                            <input type="text" class="form-control border-start-0" id="searchFilter"
+                                                placeholder="Cerca per nom, habilitats o ubicació">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center mt-4">
+                                        <button type="submit" class="btn btn-primary px-4 py-2 me-2">
+                                            <i class="bi bi-filter me-2"></i>Aplicar filtres
+                                        </button>
+                                        <button type="reset" class="btn btn-outline-secondary px-4 py-2">
+                                            <i class="bi bi-x-circle me-2"></i>Reiniciar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resultados - Grid de profesionales -->
+    <section class="py-5" data-aos="fade-up">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Professionals Destacats</h2>
+                <div class="d-flex align-items-center">
+                    <span class="me-3 text-muted">Ordenar per:</span>
+                    <select class="form-select form-select-sm" style="width: auto;">
+                        <option value="relevance">Rellevància</option>
+                        <option value="recent">Més recents</option>
+                        <option value="name">Nom (A-Z)</option>
+                        <option value="experience">Experiència</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Professional 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 shadow border-0 rounded-4 position-relative">
+                        <div class="professional-badge">Direcció</div>
+                        <div class="position-relative">
+                            <img src="./img/professionals/actor-compress.webp" alt="Carla Simón"
+                                class="card-img-top rounded-top-4 object-fit-cover" style="height: 200px;">
+                            <div class="professional-availability available">Disponible</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5">Carla Simón</h3>
+                            <p class="text-muted mb-2">Directora de Cinema</p>
+                            <p class="card-text mb-3">Guanyadora de l'Os d'Or per Alcarràs. Especialitzada en cinema
+                                social i drames familiars amb arrels a la ruralitat valenciana.</p>
+                            <div class="mb-3">
+                                <span class="tag">Ficció</span>
+                                <span class="tag">Drama</span>
+                                <span class="tag">Rural</span>
+                            </div>
+                        </div>
+                        <div
+                            class="card-footer bg-transparent d-flex justify-content-between align-items-center border-top-0 pt-0">
+                            <div>
+                                <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Veure perfil</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 shadow border-0 rounded-4 position-relative">
+                        <div class="professional-badge">Fotografia</div>
+                        <div class="position-relative">
+                            <img src="./img/professionals/actor-compress.webp" alt="Marc Martínez"
+                                class="card-img-top rounded-top-4 object-fit-cover" style="height: 200px;">
+                            <div class="professional-availability partial">Parcial</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5">Marc Martínez</h3>
+                            <p class="text-muted mb-2">Director de Fotografia</p>
+                            <p class="card-text mb-3">Especialitzat en fotografia per a documentals i ficció.
+                                Treballa amb llum natural i aconsegueix atmosferes úniques en exteriors.</p>
+                            <div class="mb-3">
+                                <span class="tag">Documental</span>
+                                <span class="tag">Exteriors</span>
+                                <span class="tag">Naturalesa</span>
+                            </div>
+                        </div>
+                        <div
+                            class="card-footer bg-transparent d-flex justify-content-between align-items-center border-top-0 pt-0">
+                            <div>
+                                <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Veure perfil</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 shadow border-0 rounded-4 position-relative">
+                        <div class="professional-badge">Actuació</div>
+                        <div class="position-relative">
+                            <img src="./img/professionals/actor-compress.webp" alt="Júlia Costa"
+                                class="card-img-top rounded-top-4 object-fit-cover" style="height: 200px;">
+                            <div class="professional-availability busy">En projecte</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5">Júlia Costa</h3>
+                            <p class="text-muted mb-2">Actriu</p>
+                            <p class="card-text mb-3">Actriu versàtil amb experiència en cinema, teatre i televisió.
+                                Especialitzada en papers dramàtics i comèdia.</p>
+                            <div class="mb-3">
+                                <span class="tag">Cinema</span>
+                                <span class="tag">Teatre</span>
+                                <span class="tag">TV</span>
+                            </div>
+                        </div>
+                        <div
+                            class="card-footer bg-transparent d-flex justify-content-between align-items-center border-top-0 pt-0">
+                            <div>
+                                <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Veure perfil</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 shadow border-0 rounded-4 position-relative">
+                        <div class="professional-badge">So</div>
+                        <div class="position-relative">
+                            <img src="./img/professionals/actor-compress.webp" alt="Pau Ferrer"
+                                class="card-img-top rounded-top-4 object-fit-cover" style="height: 200px;">
+                            <div class="professional-availability available">Disponible</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5">Pau Ferrer</h3>
+                            <p class="text-muted mb-2">Tècnic de So i Dissenyador Sonor</p>
+                            <p class="card-text mb-3">Especialista en captació de so directe i postproducció d'àudio
+                                per a cinema i documentals. Expert en ambients naturals.</p>
+                            <div class="mb-3">
+                                <span class="tag">So Directe</span>
+                                <span class="tag">Disseny Sonor</span>
+                                <span class="tag">Postproducció</span>
+                            </div>
+                        </div>
+                        <div
+                            class="card-footer bg-transparent d-flex justify-content-between align-items-center border-top-0 pt-0">
+                            <div>
+                                <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Veure perfil</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 shadow border-0 rounded-4 position-relative">
+                        <div class="professional-badge">Producció</div>
+                        <div class="position-relative">
+                            <img src="./img/professionals/actor-compress.webp" alt="Elena Soler"
+                                class="card-img-top rounded-top-4 object-fit-cover" style="height: 200px;">
+                            <div class="professional-availability partial">Parcial</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5">Elena Soler</h3>
+                            <p class="text-muted mb-2">Productora Executiva</p>
+                            <p class="card-text mb-3">Especialitzada en cerca de finançament i gestió de coproduccions
+                                internacionals. Experiència en llargmetratges i documentals.</p>
+                            <div class="mb-3">
+                                <span class="tag">Finançament</span>
+                                <span class="tag">Coproducció</span>
+                                <span class="tag">Internacional</span>
+                            </div>
+                        </div>
+                        <div
+                            class="card-footer bg-transparent d-flex justify-content-between align-items-center border-top-0 pt-0">
+                            <div>
+                                <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Veure perfil</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 shadow border-0 rounded-4 position-relative">
+                        <div class="professional-badge">Guió</div>
+                        <div class="position-relative">
+                            <img src="./img/professionals/actor-compress.webp" alt="Xavier Campos"
+                                class="card-img-top rounded-top-4 object-fit-cover" style="height: 200px;">
+                            <div class="professional-availability available">Disponible</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5">Xavier Campos</h3>
+                            <p class="text-muted mb-2">Guionista</p>
+                            <p class="card-text mb-3">Escriptor de guions per a cinema i televisió. Especialitzat en
+                                històries basades en fets reals i adaptacions literàries.</p>
+                            <div class="mb-3">
+                                <span class="tag">Adaptacions</span>
+                                <span class="tag">Drama</span>
+                                <span class="tag">Històric</span>
+                            </div>
+                        </div>
+                        <div
+                            class="card-footer bg-transparent d-flex justify-content-between align-items-center border-top-0 pt-0">
+                            <div>
+                                <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Veure perfil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paginación -->
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section text-white text-center py-5 rounded-4 shadow mx-md-4" data-aos="fade-up">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="mb-4">Ets professional del cinema valencià?</h2>
+                    <p class="lead mb-4">Uneix-te al nostre directori i fes-te visible per a productores, directors i
+                        altres professionals del sector.</p>
+                    <a href="#" class="btn btn-light btn-lg px-5 py-3">
+                        <i class="bi bi-person-plus-fill me-2"></i>Registra't com a professional
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-5 pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
+                    <h3 class="h4">CinemaViu</h3>
+                    <p>Associació Valenciana de Cinema que promou i dona suport al cinema en valencià a tota la
+                        Comunitat.</p>
+                    <div class="social-icons">
+                        <a href="#" class="btn"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="btn"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="btn"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="h4">Enllaços ràpids</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="./index.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>Inici
+                            </a></li>
+                        <li class="mb-3"><a href="./ranquin.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>Rànquing pel·lícules
+                            </a></li>
+                        <li class="mb-3"><a href="./professionals.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>Professionals
+                            </a></li>
+                        <li class="mb-3"><a href="./soci.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>Ser soci
+                            </a></li>
+                        <li><a href="diw.html" class="text-white text-decoration-none">
+                                <i class="bi bi-chevron-right me-2"></i>DIW
+                            </a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
+                    <h3 class="h4">Contacte</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-geo-alt me-3 "></i>
+                            <span>Carrer del Cinema, 123, València</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-envelope me-3 "></i>
+                            <span>info@cinemaviu.val</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-telephone me-3 "></i>
+                            <span>(34) 963 123 456</span>
+                        </li>
+                    </ul>
+                    <!-- Mini formulario de contacto rápido -->
+                    <div class="mt-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Missatge ràpid">
+                            <button class="btn btn-primary" type="button">
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-5 mb-4 bg-light opacity-25">
+
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 Associació Valenciana de Cinema. Tots els drets reservats.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"
+                                class="text-white-50 text-decoration-none small">Política de Privacitat</a></li>
+                        <li class="list-inline-item mx-3"><a href="#"
+                                class="text-white-50 text-decoration-none small">Termes d'Ús</a></li>
+                        <li class="list-inline-item"><a href="#"
+                                class="text-white-50 text-decoration-none small">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Volver Arriba -->
+    <a href="#"
+        class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 d-flex align-items-center justify-content-center shadow"
+        id="backToTop"
+        style="width: 45px; height: 45px; z-index: 1030; opacity: 0; visibility: hidden; transition: all 0.3s ease;">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        // Inicializar AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Cambiar navbar al hacer scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled', 'navbar-dark');
+                navbar.classList.remove('navbar-light');
+            } else {
+                navbar.classList.remove('scrolled', 'navbar-dark');
+                navbar.classList.add('navbar-light');
+            }
+
+            // Mostrar/ocultar botón volver arriba
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.style.opacity = '1';
+                backToTop.style.visibility = 'visible';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.visibility = 'hidden';
+            }
+        });
+
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                if (this.getAttribute('href') === '#') return;
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Funcionalidad para el botón de volver arriba
+        document.getElementById('backToTop').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CinemaViu - Associació Valenciana de Cinema que promou i dona suport al cinema en valencià">
+    <title>CinemaViu - Associació Valenciana de Cinema</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- CSS minimalista personalizado -->
+    <style>
+        :root {
+            /* Paleta de rojos */
+            --primary: #e03131;
+            --primary-dark: #c92a2a;
+            --primary-light: #ff6b6b;
+            --secondary: #ffdeeb;
+            --accent: #ff8787;
+
+            /* Configuración de Bootstrap */
+            --bs-primary-rgb: 224, 49, 49;
+            --bs-primary: var(--primary);
+            --bs-primary-hover: var(--primary-dark);
+
+            /* Redefiniendo colores Bootstrap adicionales */
+            --bs-link-color: var(--primary);
+            --bs-link-hover-color: var(--primary-dark);
+            --bs-btn-hover-border-color: var(--primary-dark);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #ffffff 0%, #fff5f5 25%, #ffc9c9 75%, #ff8787 100%);
+            background-attachment: fixed;
+            line-height: 1.6;
+            color: #333; /* Asegurar suficiente contraste */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'DM Serif Display', serif;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Mejorar contraste para accesibilidad */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white; /* Asegurar buen contraste */
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 0.25rem rgba(224, 49, 49, 0.5);
+        }
+
+        .btn-outline-secondary {
+            color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        .btn-outline-secondary:hover,
+        .btn-outline-secondary:focus {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            color: white;
+            box-shadow: 0 0 0 0.25rem rgba(224, 49, 49, 0.5);
+        }
+
+        .text-primary {
+            color: var(--primary-dark) !important; /* Oscurecido para mejorar contraste */
+        }
+
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+
+        /* Mejorar foco visual para teclado */
+        a:focus,
+        button:focus,
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 2px solid var(--primary-dark);
+            outline-offset: 2px;
+        }
+
+        /* Estilo para saltar al contenido principal */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 8px;
+            z-index: 2000;
+            text-decoration: none;
+            transition: top 0.3s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: none;
+        }
+
+        /* Navbar personalizado */
+        .navbar {
+            background: rgba(255, 255, 255, 0.9); /* Aumentado para contraste */
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-nav .nav-item {
+            margin-right: 1.5rem;
+        }
+
+        .navbar.scrolled {
+            background: rgba(201, 42, 42, 0.95); /* Aumentado para contraste */
+        }
+
+        .navbar-brand {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 700;
+            color: var(--primary-dark); /* Oscurecido para mejorar contraste */
+            font-size: 1.5rem;
+        }
+
+        .navbar-dark .navbar-brand {
+            color: white;
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px; /* Aumentado para visibilidad */
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after,
+        .nav-link:focus::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active,
+        .nav-link:focus {
+            color: var(--primary-dark) !important;
+        }
+
+        .navbar-dark .nav-link:hover,
+        .navbar-dark .nav-link.active,
+        .navbar-dark .nav-link:focus {
+            color: white !important;
+        }
+
+        /* Breadcrumbs estilizados para mejor accesibilidad */
+        .breadcrumb-item a {
+            color: var(--primary-dark) !important;
+            text-decoration: underline; /* Ayuda a identificar visualmente que son enlaces */
+            font-weight: 500;
+        }
+        
+        .breadcrumb-item a:hover,
+        .breadcrumb-item a:focus {
+            color: #9a1c1c !important; /* Más oscuro para mejor contraste */
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: #5a5a5a; /* Gris oscuro para mejor contraste */
+            font-weight: 500;
+        }
+
+        /* Hero section */
+        .hero-section {
+            position: relative;
+            min-height: 85vh;
+            background: rgba(255, 255, 255, 0.9); /* Aumentado para contraste */
+            overflow: hidden;
+            padding: 3rem 0;
+        }
+
+        .hero-content {
+            background: linear-gradient(135deg, rgba(201, 42, 42, 0.95) 0%, rgba(170, 30, 30, 0.9) 100%); /* Oscurecido para mejorar contraste */
+            border-radius: 1rem;
+            padding: 3rem;
+            color: white;
+            box-shadow: 0 10px 25px rgba(224, 49, 49, 0.25);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-content:hover,
+        .hero-content:focus-within {
+            transform: translateY(-5px);
+        }
+
+        .hero-image {
+            max-width: 350px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        /* Cards con mejor accesibilidad */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 1rem;
+            overflow: hidden;
+            background-color: white; /* Asegurar que el fondo sea blanco para contraste */
+        }
+
+        .card:hover,
+        .card:focus-within {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(224, 49, 49, 0.15);
+        }
+
+        .card-img-container {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-top {
+            transition: transform 0.3s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #f8f9fa;
+        }
+
+        .card:hover .card-img-top,
+        .card:focus-within .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-text {
+            color: #333; /* Oscurecido para mejor contraste */
+            line-height: 1.6;
+        }
+
+        /* Secciones */
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            color: var(--primary-dark); /* Oscurecido para mejorar contraste */
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            transform: translateX(-50%);
+        }
+
+        .section-light {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(224, 49, 49, 0.1);
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+
+        .section-dark {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(224, 49, 49, 0.25);
+            color: white;
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+
+        /* Menú flotante mejorado para accesibilidad */
+        .floating-menu {
+            position: fixed;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .floating-menu .btn {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(224, 49, 49, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: var(--primary-dark); /* Color más oscuro para mejor contraste */
+            font-weight: bold;
+        }
+
+        .floating-menu .btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .floating-menu .btn::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 60px;
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            transform: translateX(10px);
+            z-index: 1001;
+        }
+
+        .floating-menu .btn:hover::before,
+        .floating-menu .btn:focus::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .floating-menu .btn:hover,
+        .floating-menu .btn:focus {
+            background-color: var(--primary);
+            color: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(224, 49, 49, 0.5);
+        }
+
+        /* Footer accesible */
+        footer {
+            background-color: #c92a2a;
+            color: white;
+            padding-top: 5rem;
+            margin-top: 5rem;
+            position: relative;
+        }
+
+        footer h3 {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        footer h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        footer a {
+            color: white !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        footer a:hover,
+        footer a:focus {
+            color: var(--secondary) !important;
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+
+        .social-icons .btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons .btn:hover,
+        .social-icons .btn:focus {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Botón volver arriba accesible */
+        #backToTop {
+            background-color: var(--primary-dark);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1030;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #backToTop:hover,
+        #backToTop:focus {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        #backToTop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background-color: rgba(255, 255, 255, 0.95);
+                border-radius: 1rem;
+                padding: 1rem;
+                margin-top: 0.5rem;
+                box-shadow: 0 5px 15px rgba(224, 49, 49, 0.1);
+            }
+
+            .navbar-dark .navbar-collapse {
+                background-color: rgba(201, 42, 42, 0.95);
+            }
+
+            .card-img-container {
+                aspect-ratio: 3/4;
+            }
+            
+            .hero-content {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .floating-menu {
+                position: fixed;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                transform: none;
+                flex-direction: row;
+                justify-content: center;
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 -5px 20px rgba(224, 49, 49, 0.1);
+                padding: 15px 0;
+                border-radius: 20px 20px 0 0;
+                z-index: 1031; /* Mayor que backToTop */
+            }
+
+            .floating-menu .btn {
+                margin: 0 10px;
+                margin-bottom: 0;
+            }
+
+            .floating-menu .btn::before {
+                right: auto;
+                top: -40px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-5px);
+            }
+
+            .floating-menu .btn:hover::before,
+            .floating-menu .btn:focus::before {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            .card-img-container {
+                aspect-ratio: 16/9;
+            }
+            
+            #backToTop {
+                bottom: 80px; /* Mayor para evitar solapamiento con el menú flotante */
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .card-img-container {
+                aspect-ratio: 3/2;
+            }
+            
+            .hero-content {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Mejoras específicas para lectores de pantalla */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* Mejoras para alto contraste */
+        @media (forced-colors: active) {
+            .card, .btn, .nav-link, .hero-content, .section-light, .section-dark {
+                border: 1px solid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Enlace para saltar al contenido principal (para accesibilidad) -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" id="mainNav" aria-label="Navegación principal">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="./index.html" data-aos="fade-right"
+                data-aos-duration="1000">
+                <img src="./img/logo.webp" alt="Logo de l'Associació Valenciana de Cinema" height="40" class="me-2">
+                CinemaViu
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar/ocultar menú de navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100">
+                        <a class="nav-link active" href="./index.html" aria-current="page">Inici</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="200">
+                        <a class="nav-link" href="./ranquin.html">Rànquing pel·lícules</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="300">
+                        <a class="nav-link" href="./professionals.html">Professionals</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
+                        <a class="nav-link" href="./soci.html">Fes-te soci</a>
+                    </li>
+                </ul>
+                <button class="btn btn-primary ms-lg-3 shadow-sm" data-aos="fade-left" data-aos-delay="500"
+                    onclick="window.location.href='#formularis'" aria-label="Accedir al compte">
+                    <i class="bi bi-person-circle me-2" aria-hidden="true"></i>Accedir
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container mt-2">
+        <nav aria-label="Ruta de navegació">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Inici</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Floating menu -->
+    <nav class="floating-menu" aria-label="Menú d'accés ràpid">
+        <a href="#formularis" class="btn btn-light shadow" data-tooltip="Inici sessió" aria-label="Anar a iniciar sessió">
+            <i class="bi bi-person-circle" aria-hidden="true"></i>
+            <span class="sr-only">Inici sessió</span>
+        </a>
+        <a href="#noticias" class="btn btn-light shadow" data-tooltip="Notícies" aria-label="Anar a notícies">
+            <i class="bi bi-newspaper" aria-hidden="true"></i>
+            <span class="sr-only">Notícies</span>
+        </a>
+        <a href="#estrenos" class="btn btn-light shadow" data-tooltip="Estrenes" aria-label="Anar a estrenes">
+            <i class="bi bi-film" aria-hidden="true"></i>
+            <span class="sr-only">Estrenes</span>
+        </a>
+        <a href="#" class="btn btn-light shadow" data-tooltip="Tancar sessió" aria-label="Tancar sessió">
+            <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+            <span class="sr-only">Tancar sessió</span>
+        </a>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main id="main-content">
+        <!-- Hero section -->
+        <section class="hero-section py-5 d-flex align-items-center" id="hero" aria-labelledby="hero-heading">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="hero-content shadow">
+                            <h1 class="display-3 fw-bold mb-4" id="hero-heading">CinemaViu</h1>
+                            <h2 class="h3 mb-4">Associació Valenciana de Cinema</h2>
+                            <p class="lead mb-4">Donem suport i promovem el cinema valencià, impulsant els seus creadors i
+                                enfortint la nostra cultura cinematogràfica.</p>
+                            <a href="./soci.html" class="btn btn-light mt-3">
+                                <i class="bi bi-people me-2" aria-hidden="true"></i>Uneix-te a nosaltres
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                        <img src="./img/logo.webp" alt="Logo de CinemaViu" class="img-fluid rounded-circle hero-image shadow"
+                            style="max-width: 350px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Últimes pel·lícules section -->
+        <section class="py-5 section-light my-5 shadow" id="estrenos" data-aos="fade-up" data-aos-duration="800" aria-labelledby="estrenos-heading">
+            <div class="container py-4">
+                <h2 class="section-title text-center mb-5" id="estrenos-heading">Últimes pel·lícules en valencià</h2>
+                <div class="row">
+                    <!-- Película 1 -->
+                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <article class="card h-100 shadow">
+                            <div class="card-img-container bg-light">
+                                <img src="./img/elquesabem.webp" class="card-img-top" alt="Cartell de la pel·lícula 'El que sabem'">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title h5">El que sabem</h3>
+                                <p class="card-text">
+                                    Dirigida per Jordi Núñez, narra la història de Carla i Gael,
+                                    dos joves que descobreixen l'amor i l'amistat en una València
+                                    plena d'encants i incerteses.
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 pb-3">
+                                <a href="./pelicula1.html" class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-info-circle me-2" aria-hidden="true"></i>Més informació
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Película 2 -->
+                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <article class="card h-100 shadow">
+                            <div class="card-img-container bg-light">
+                                <img src="./img/desenterrats.webp" class="card-img-top" alt="Cartell de la pel·lícula 'Desenterrats'">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title h5">Desenterrats</h3>
+                                <p class="card-text">
+                                    Un grup d'investigadors es trasllada a un antic poblat valencià
+                                    per excavar unes restes arqueològiques que podrien canviar
+                                    la història.
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 pb-3">
+                                <a href="./pelicula2.html" class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-info-circle me-2" aria-hidden="true"></i>Més informació
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Película 3 -->
+                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <article class="card h-100 shadow">
+                            <div class="card-img-container bg-light">
+                                <img src="./img/carceller.webp" class="card-img-top"
+                                    alt="Cartell del documental 'Carceller. L'home que va morir dues vegades'">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title h5">Carceller. L'home que va morir dues vegades</h3>
+                                <p class="card-text">
+                                    Documental que aprofundeix en la figura de Vicent Miquel Carceller,
+                                    un editor valencià afusellat pel franquisme.
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 pb-3">
+                                <a href="./pelicula3.html" class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-info-circle me-2" aria-hidden="true"></i>Més informació
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Película 4 -->
+                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                        <article class="card h-100 shadow">
+                            <div class="card-img-container bg-light">
+                                <img src="./img/lina.webp" class="card-img-top" alt="Cartell del curtmetratge 'Lina'">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title h5">Lina</h3>
+                                <p class="card-text">
+                                    Un curtmetratge que retrata el dia a dia de Lina, una jove
+                                    estudiant valenciana que compagina la passió per la dansa
+                                    amb el treball en una floristeria familiar.
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 pb-3">
+                                <a href="./pelicula4.html" class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-info-circle me-2" aria-hidden="true"></i>Més informació
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Botón para explorar más películas -->
+                <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="500">
+                    <a href="./ranquin.html" class="btn btn-primary shadow">
+                        <i class="bi bi-film me-2" aria-hidden="true"></i>Explorar més pel·lícules
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Esdeveniments section -->
+        <section class="py-5 section-dark my-5 shadow" id="esdeveniments" data-aos="fade-up" data-aos-duration="800" aria-labelledby="esdeveniments-heading">
+            <div class="container py-4">
+                <h2 class="section-title text-center text-white mb-5" id="esdeveniments-heading">Esdeveniments</h2>
+                <div class="calendar-container bg-white p-4 rounded-4 shadow" data-aos="fade-up" data-aos-delay="200">
+                    <iframe src="https://embed.styledcalendar.com/#MYm4YEAOTemw1L1q6SWT" title="Calendari d'esdeveniments de CinemaViu"
+                        class="styled-calendar-container w-100" style="height: 500px; border: none; border-radius: 1rem;"
+                        data-cy="calendar-embed-iframe"></iframe>
+                    <script async type="module" src="https://embed.styledcalendar.com/assets/parent-window.js"></script>
+                </div>
+
+                <!-- Call to action para eventos -->
+                <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#" class="btn btn-light shadow">
+                        <i class="bi bi-calendar-event me-2" aria-hidden="true"></i>Veure tots els esdeveniments
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formularis section -->
+        <section class="py-5 section-light my-5 shadow" id="formularis" data-aos="fade-up" data-aos-duration="800" aria-labelledby="formularis-heading">
+            <div class="container py-4">
+                <h2 class="section-title text-center mb-5" id="formularis-heading">Accés i Subscripció</h2>
+                <div class="row">
+                    <!-- Newsletter -->
+                    <div class="col-lg-6 mb-4" data-aos="fade-right" data-aos-delay="200">
+                        <div class="card h-100 shadow">
+                            <div class="card-header bg-primary text-white py-4">
+                                <h3 class="m-0">Newsletter</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="card-text mb-4">Subscriu-te a la nostra newsletter per estar al dia de les últimes
+                                    novetats del cinema valencià.</p>
+                                <form aria-labelledby="newsletter-form">
+                                    <div class="visually-hidden" id="newsletter-form">Formulari de subscripció a la newsletter</div>
+                                    <div class="mb-4 position-relative">
+                                        <label for="newsletter-email" class="form-label">Correu electrònic</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-transparent border-end-0">
+                                                <i class="bi bi-envelope text-primary" aria-hidden="true"></i>
+                                            </span>
+                                            <input type="email" class="form-control border-start-0" id="newsletter-email"
+                                                placeholder="El teu correu" required aria-describedby="email-help">
+                                        </div>
+                                        <div id="email-help" class="form-text">No compartirem el teu correu amb tercers.</div>
+                                    </div>
+                                    <div class="form-check mb-4">
+                                        <input class="form-check-input" type="checkbox" id="privacyCheck" required>
+                                        <label class="form-check-label" for="privacyCheck">
+                                            Accepto la <a href="#" class="text-decoration-underline">política de privacitat</a>
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 shadow">
+                                        <i class="bi bi-send me-2" aria-hidden="true"></i>Subscriu-te
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Login -->
+                    <div class="col-lg-6 mb-4" data-aos="fade-left" data-aos-delay="300">
+                        <div class="card h-100 shadow">
+                            <div class="card-header bg-primary text-white py-4">
+                                <h3 class="m-0">Inicia sessió</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="card-text mb-4">Accedeix a la teva àrea personal per consultar les teves dades i
+                                    rebre informació exclusiva.</p>
+                                <form aria-labelledby="login-form">
+                                    <div class="visually-hidden" id="login-form">Formulari d'inici de sessió</div>
+                                    <div class="mb-3 position-relative">
+                                        <label for="login-email" class="form-label">Correu electrònic</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-transparent border-end-0">
+                                                <i class="bi bi-envelope text-primary" aria-hidden="true"></i>
+                                            </span>
+                                            <input type="email" class="form-control border-start-0" id="login-email"
+                                                placeholder="El teu correu" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 position-relative">
+                                        <label for="login-password" class="form-label">Contrasenya</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-transparent border-end-0">
+                                                <i class="bi bi-lock text-primary" aria-hidden="true"></i>
+                                            </span>
+                                            <input type="password" class="form-control border-start-0" id="login-password"
+                                                placeholder="La teva contrasenya" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="rememberCheck">
+                                            <label class="form-check-label" for="rememberCheck">
+                                                Recorda'm
+                                            </label>
+                                        </div>
+                                        <a href="#" class="text-decoration-underline">Has oblidat la contrasenya?</a>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 shadow">
+                                        <i class="bi bi-box-arrow-in-right me-2" aria-hidden="true"></i>Inicia sessió
+                                    </button>
+                                    <div class="text-center mt-4">
+                                        <span>No tens compte? </span>
+                                        <a href="./soci.html" class="text-decoration-underline">Registra't</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Noticies section -->
+        <section class="py-5 section-dark my-5 shadow" id="noticias" data-aos="fade-up" data-aos-duration="800" aria-labelledby="noticias-heading">
+            <div class="container py-4">
+                <h2 class="section-title text-center text-white mb-5" id="noticias-heading">Notícies de Cinema Valencià</h2>
+                <div class="row">
+                    <!-- Noticia 1 -->
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <article class="card h-100 shadow">
+                            <div class="card-img-container bg-light position-relative">
+                                <img src="./img/fesitval-cine-valencia.webp" class="card-img-top"
+                                    alt="Imatge del Festival de Cinema de València">
+                                <div class="badge bg-primary position-absolute top-0 end-0 m-3">Nova</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title h5">Festival de Cinema de València</h3>
+                                <p class="card-text">
+                                    El Festival de Cinema de València celebra la seva 35ª edició amb una selecció de
+                                    pel·lícules valencianes que destaquen per la seva originalitat i qualitat.
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 pb-3">
+                                <a href="#" class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-book me-2" aria-hidden="true"></i>Llegir més
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Noticia 2 -->
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <article class="card h-100 shadow">
+                            <div class="card-img-container bg-light position-relative">
+                                <img src="./img/premios-cine-valenciano.webp" class="card-img-top"
+                                    alt="Imatge dels Premis del Cinema Valencià">
+                                <div class="badge bg-primary position-absolute top-0 end-0 m-3">Destacada</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title h5">Premis del Cinema Valencià</h3>
+                                <p class="card-text">
+                                    La gala dels Premis del Cinema Valencià ha reconegut els millors talents de l'any.
+                                    Entre els guardonats es troben directors, actors i tècnics que han contribuït al
+                                    creixement del cinema en la regió.
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 pb-3">
+                                <a href="#" class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-book me-2" aria-hidden="true"></i>Llegir més
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Noticia 3 -->
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <article class="card h-100 shadow">
+                            <div class="card-img-container bg-light">
+                                <img src="./img/ayudas-producciones-valencianas.webp" class="card-img-top"
+                                    alt="Imatge sobre ajuts per a produccions valencianes">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title h5">Novetats d'Ajuts per a Produccions Valencianes</h3>
+                                <p class="card-text">
+                                    La Generalitat Valenciana ha anunciat noves ajudes econòmiques per donar suport a la
+                                    producció de pel·lícules i curtmetratges en valencià.
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 pb-3">
+                                <a href="#" class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-book me-2" aria-hidden="true"></i>Llegir més
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Call to action para noticias -->
+                <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#" class="btn btn-light shadow">
+                        <i class="bi bi-newspaper me-2" aria-hidden="true"></i>Veure totes les notícies
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-5 pt-5" aria-labelledby="footer-heading">
+        <div class="container">
+            <h2 id="footer-heading" class="visually-hidden">Informació del lloc web i contacte</h2>
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
+                    <h3 class="h4">CinemaViu</h3>
+                    <p>Associació Valenciana de Cinema que promou i dona suport al cinema en valencià a tota la
+                        Comunitat.</p>
+                    <div class="social-icons" aria-label="Xarxes socials">
+                        <a href="#" class="btn" aria-label="Facebook">
+                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="Twitter">
+                            <i class="bi bi-twitter-x" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="Instagram">
+                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="YouTube">
+                            <i class="bi bi-youtube" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="h4">Enllaços ràpids</h3>
+                    <nav aria-label="Enllaços ràpids del peu de pàgina">
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><a href="./index.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Inici
+                                </a></li>
+                            <li class="mb-3"><a href="./ranquin.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Rànquing pel·lícules
+                                </a></li>
+                            <li class="mb-3"><a href="./professionals.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Professionals
+                                </a></li>
+                            <li class="mb-3"><a href="./soci.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Ser soci
+                                </a></li>
+                            <li><a href="diw.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>DIW
+                                </a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
+                    <h3 class="h4">Contacte</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-geo-alt me-3 text-primary-light" aria-hidden="true"></i>
+                            <span>Carrer del Cinema, 123, València</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-envelope me-3 text-primary-light" aria-hidden="true"></i>
+                            <a href="mailto:info@cinemaviu.val" class="text-white">info@cinemaviu.val</a>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-telephone me-3 text-primary-light" aria-hidden="true"></i>
+                            <a href="tel:+34963123456" class="text-white">(34) 963 123 456</a>
+                        </li>
+                    </ul>
+                    <!-- Mini formulario de contacto rápido -->
+                    <div class="mt-4">
+                        <label for="quick-message" class="form-label visually-hidden">Missatge ràpid</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="quick-message" placeholder="Missatge ràpid" aria-label="Missatge ràpid">
+                            <button class="btn btn-primary" type="submit" aria-label="Enviar missatge">
+                                <i class="bi bi-send" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-5 mb-4 bg-light opacity-25">
+
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 Associació Valenciana de Cinema. Tots els drets reservats.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"
+                                class="text-white-50 text-decoration-underline small">Política de Privacitat</a></li>
+                        <li class="list-inline-item mx-3"><a href="#"
+                                class="text-white-50 text-decoration-underline small">Termes d'Ús</a></li>
+                        <li class="list-inline-item"><a href="#"
+                                class="text-white-50 text-decoration-underline small">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Volver Arriba -->
+    <a href="#" class="btn rounded-circle shadow" id="backToTop" aria-label="Tornar a dalt">
+        <i class="bi bi-arrow-up" aria-hidden="true"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        // Inicializar AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false,
+            disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches // Respeta preferencia de movimiento reducido
+        });
+
+        // Cambiar navbar al hacer scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled', 'navbar-dark');
+                navbar.classList.remove('navbar-light');
+            } else {
+                navbar.classList.remove('scrolled', 'navbar-dark');
+                navbar.classList.add('navbar-light');
+            }
+
+            // Mostrar/ocultar botón volver arriba
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+                backToTop.style.opacity = '1';
+                backToTop.style.visibility = 'visible';
+            } else {
+                backToTop.classList.remove('visible');
+                backToTop.style.opacity = '0';
+                backToTop.style.visibility = 'hidden';
+            }
+        });
+
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                if (this.getAttribute('href') === '#') return;
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+                    });
+                    
+                    // Establecer el foco en el elemento objetivo para accesibilidad
+                    targetElement.setAttribute('tabindex', '-1');
+                    targetElement.focus();
+                }
+            });
+        });
+
+        // Funcionalidad para el botón de volver arriba
+        document.getElementById('backToTop').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+            });
+            
+            // Establecer el foco en el primer elemento enfocable
+            document.querySelector('a.skip-link').focus();
+        });
+        
+        // Mejorar accesibilidad del teclado para la navegación
+        const focusableElements = document.querySelectorAll(
+            'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        focusableElements.forEach(element => {
+            element.addEventListener('keydown', function(e) {
+                // Activar elementos con la tecla Enter o Espacio
+                if (e.key === 'Enter' || e.key === ' ') {
+                    if (element.tagName.toLowerCase() !== 'input' && 
+                        element.tagName.toLowerCase() !== 'textarea') {
+                        e.preventDefault();
+                        element.click();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
