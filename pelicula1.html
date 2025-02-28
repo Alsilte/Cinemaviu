@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El que sabem - Pel·lícula sobre la història de la Carla, una jove que viu un estiu de descobriments a València">
     <title>El que sabem - CinemaViu</title>
 
     <!-- Bootstrap CSS -->
@@ -47,33 +48,71 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(to bottom, #ffffff 0%, #fff5f5 25%, #ffc9c9 75%, #ff8787 100%);
             background-attachment: fixed;
+            line-height: 1.6;
+            color: #333; /* Asegurar suficiente contraste */
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+        h1, h2, h3, h4, h5, h6 {
             font-family: 'DM Serif Display', serif;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Estilos para la accesibilidad del teclado */
+        a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:focus {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Enlace para saltar al contenido principal */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 8px;
+            z-index: 2000;
+            text-decoration: none;
+            transition: top 0.3s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: none;
+        }
+
+        /* Visually hidden class para lectores de pantalla */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         .btn-primary {
             background-color: var(--primary);
             border-color: var(--primary);
+            color: white; /* Garantizar contraste */
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover, 
+        .btn-primary:focus {
             background-color: var(--primary-dark);
             border-color: var(--primary-dark);
+            box-shadow: 0 0 0 0.25rem rgba(224, 49, 49, 0.5);
         }
 
         .text-primary {
-            color: var(--primary) !important;
+            color: var(--primary-dark) !important; /* Oscurecido para mejor contraste */
         }
 
         .movie-title {
-            color: var(--primary);
+            color: var(--primary-dark); /* Oscurecido para mejor contraste */
         }
 
         .movie-poster {
@@ -81,11 +120,11 @@
             border-radius: 1rem;
             box-shadow: 0 5px 15px rgba(224, 49, 49, 0.1);
             max-height: 500px;
-            /* Reduce image height */
             object-fit: cover;
         }
 
-        .movie-poster:hover {
+        .movie-poster:hover,
+        .movie-poster:focus {
             transform: scale(1.05);
         }
 
@@ -93,69 +132,75 @@
             border-radius: 1rem;
             box-shadow: 0 5px 15px rgba(224, 49, 49, 0.1);
             max-height: 400px;
-            /* Reduce video height */
         }
 
         .synopsis {
             border-radius: 1rem;
+            background-color: #f8f9fa; /* Asegurar buen contraste */
         }
 
         .btn-return {
             transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
         }
 
-        .btn-return:hover {
+        .btn-return:hover,
+        .btn-return:focus {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(224, 49, 49, 0.2);
         }
 
-        .gallery-img {
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            max-height: 250px;
-            /* Reduce gallery image height */
+        /* Breadcrumb styling con mejor contraste */
+        .breadcrumb-item a {
+            color: var(--primary-dark) !important;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        
+        .breadcrumb-item a:hover,
+        .breadcrumb-item a:focus {
+            color: #9a1c1c !important; /* Más oscuro para mejor contraste */
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: #5a5a5a; /* Gris oscuro para mejor contraste */
+            font-weight: 500;
         }
 
-        .gallery-img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Critic images */
-        .critic-img {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-        }
-
-        /* Rest of the CSS remains the same as in the original file */
+        /* Navbar styling */
         .navbar {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9); /* Aumentado para contraste */
             backdrop-filter: blur(10px);
         }
 
         .navbar.scrolled {
-            background: rgba(201, 42, 42, 0.9);
+            background: rgba(201, 42, 42, 0.95); /* Aumentado para contraste */
         }
 
         .navbar-brand {
             font-family: 'DM Serif Display', serif;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--primary-dark); /* Oscurecido para mejorar contraste */
+            font-size: 1.5rem;
         }
 
         .navbar-dark .navbar-brand {
-            color: #fff;
+            color: white;
         }
 
         .nav-link {
             position: relative;
+            font-weight: 500;
+            padding: 0.5rem 0.75rem;
         }
 
         .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
+            height: 3px; /* Aumentado para visibilidad */
             bottom: 0;
             left: 0;
             background-color: var(--primary);
@@ -163,44 +208,143 @@
         }
 
         .nav-link:hover::after,
-        .nav-link.active::after {
+        .nav-link.active::after,
+        .nav-link:focus::after {
             width: 100%;
         }
 
         .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary) !important;
+        .nav-link.active,
+        .nav-link:focus {
+            color: var(--primary-dark) !important;
         }
 
         .navbar-dark .nav-link:hover,
-        .navbar-dark .nav-link.active {
-            color: #fff !important;
+        .navbar-dark .nav-link.active,
+        .navbar-dark .nav-link:focus {
+            color: white !important;
         }
 
-        .breadcrumb-item a {
-            color: var(--primary) !important;
-            /* Use the primary red color variable */
-            text-decoration: none;
+        /* Critic card styling */
+        .critic-card {
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .breadcrumb-item a:hover {
-            color: var(--primary-dark) !important;
-            /* Darker red on hover */
-            text-decoration: underline;
+        .critic-card:hover,
+        .critic-card:focus-within {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(224, 49, 49, 0.1);
         }
 
-        .breadcrumb-item.active {
+        .critic-name {
             color: var(--primary-dark);
-            /* Active item also in red */
+            font-weight: 600;
         }
 
-        /* Remaining CSS stays the same as in the original file */
-        footer,
-        .social-icons .btn,
-        .navbar-collapse {
-            /* ... existing styles ... */
+        .critic-source {
+            color: #555; /* Oscurecido para mejor contraste */
         }
 
+        /* Rating stars con mejor contraste */
+        .rating-stars {
+            color: #E67700; /* Amarillo más oscuro para mejor contraste */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #c92a2a;
+            color: white;
+            padding-top: 5rem;
+            margin-top: 5rem;
+            position: relative;
+        }
+
+        footer h3 {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        footer h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        footer a {
+            color: white !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        footer a:hover,
+        footer a:focus {
+            color: var(--secondary) !important;
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+
+        .social-icons .btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons .btn:hover,
+        .social-icons .btn:focus {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Botón volver arriba */
+        #backToTop {
+            background-color: var(--primary-dark);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1030;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #backToTop:hover,
+        #backToTop:focus {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        #backToTop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive styling */
         @media (max-width: 991.98px) {
             .navbar-collapse {
                 background-color: rgba(255, 255, 255, 0.95);
@@ -214,20 +358,30 @@
                 background-color: rgba(201, 42, 42, 0.95);
             }
         }
-    </style>
+
+        /* Modo de alto contraste */
+        @media (forced-colors: active) {
+            .card, .btn, .nav-link, .synopsis {
+                border: 1px solid;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <!-- Enlace para saltar al contenido principal (para accesibilidad) -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" id="mainNav" aria-label="Navegación principal">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="./index.html" data-aos="fade-right"
                 data-aos-duration="1000">
                 <img src="./img/logo.webp" alt="Logo de l'Associació Valenciana de Cinema" height="40" class="me-2">
                 CinemaViu
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar/ocultar menú de navegación">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -246,214 +400,238 @@
                     </li>
                 </ul>
                 <button class="btn btn-primary ms-lg-3 shadow-sm" data-aos="fade-left" data-aos-delay="500"
-                    onclick="window.location.href='#formularis'">
-                    <i class="bi bi-person-circle me-2"></i>Accedir
+                    onclick="window.location.href='#formularis'" aria-label="Accedir al compte">
+                    <i class="bi bi-person-circle me-2" aria-hidden="true"></i>Accedir
                 </button>
             </div>
         </div>
     </nav>
 
-    <div class="container py-4">
-        <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Inici</a></li>
-                <li class="breadcrumb-item"><a href="index.html#estrenos" class="text-decoration-none">Últimes
-                        pel·lícules</a></li>
-                <li class="breadcrumb-item active" aria-current="page">El que sabem</li>
-            </ol>
-        </nav>
+    <main id="main-content">
+        <div class="container py-4">
+            <!-- Breadcrumb -->
+            <nav aria-label="Ruta de navegació">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Inici</a></li>
+                    <li class="breadcrumb-item"><a href="index.html#estrenos">Últimes pel·lícules</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">El que sabem</li>
+                </ol>
+            </nav>
 
-        <!-- Contenido principal -->
-        <div class="bg-white rounded-4 shadow p-4 mb-5" data-aos="fade-up">
-            <div class="row">
-                <div class="col-12 text-center mb-4">
-                    <h1 class="movie-title display-4 fw-bold">El que sabem</h1>
+            <!-- Contenido principal -->
+            <article class="bg-white rounded-4 shadow p-4 mb-5" data-aos="fade-up">
+                <header class="row">
+                    <div class="col-12 text-center mb-4">
+                        <h1 class="movie-title display-4 fw-bold">El que sabem</h1>
+                    </div>
+                </header>
+
+                <div class="row g-4">
+                    <!-- Poster de la película -->
+                    <div class="col-12 col-md-6" data-aos="fade-right" data-aos-delay="100">
+                        <figure>
+                            <img src="./img/elquesabem.webp" alt="Cartell de la pel·lícula 'El que sabem', mostra als protagonistes Carla i Gael a la platja de València"
+                                class="movie-poster img-fluid w-100 h-auto object-fit-contain" style="max-height: 500px;">
+                        </figure>
+                    </div>
+
+                    <!-- Video/trailer -->
+                    <div class="col-12 col-md-6" data-aos="fade-left" data-aos-delay="200">
+                        <figure>
+                            <video controls class="movie-video w-100 mb-3" aria-label="Tràiler de la pel·lícula 'El que sabem'" poster="./img/elquesabem.webp">
+                                <source src="./videos/elquesabem.mp4" type="video/mp4">
+                                <p>El teu navegador no admet la reproducció de vídeos. Pots <a href="./videos/elquesabem.mp4">descarregar el vídeo</a> per veure'l al teu dispositiu.</p>
+                            </video>
+                            <figcaption class="visually-hidden">Tràiler oficial de la pel·lícula "El que sabem"</figcaption>
+                        </figure>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row g-4">
-                <!-- Poster de la película -->
-                <div class="col-12 col-md-6" data-aos="fade-right" data-aos-delay="100">
-                    <img src="./img/elquesabem.webp" alt="Cartell de la pel·lícula 'El que sabem'"
-                        class="movie-poster img-fluid w-100 h-auto object-fit-contain" style="max-height: 500px;">
-                </div>
-
-                <!-- Video/trailer -->
-                <div class="col-12 col-md-6" data-aos="fade-left" data-aos-delay="200">
-                    <video controls class="movie-video w-100 mb-3">
-                        <source src="./videos/elquesabem.mp4" type="video/mp4">
-                        El teu navegador no admet la reproducció de vídeos.
-                    </video>
-                </div>
-            </div>
-
-            <!-- Detalles de la película -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body">
-                            <h2 class="fs-3 mb-3 text-primary">Detalls de la pel·lícula</h2>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p class="mb-2"><strong>Any:</strong> 2022</p>
-                                    <p class="mb-2"><strong>Director:</strong> Jordi Núñez</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="mb-2"><strong>Personatges principals:</strong> Carla, Gael, Àlex, Anna</p>
-                                    <p class="mb-2"><strong>Actors:</strong> Mireia Oriol (Carla), Carlo Blanco (Gael),
-                                        Jorge Motos (Àlex), Noelia Franco (Anna)</p>
-                                </div>
+                <!-- Detalles de la película -->
+                <section class="row mt-5" aria-labelledby="details-heading">
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <h2 class="fs-3 mb-3 text-primary" id="details-heading">Detalls de la pel·lícula</h2>
+                                <dl class="row">
+                                    <div class="col-md-6">
+                                        <dt>Any:</dt>
+                                        <dd>2022</dd>
+                                        
+                                        <dt>Director:</dt>
+                                        <dd>Jordi Núñez</dd>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dt>Personatges principals:</dt>
+                                        <dd>Carla, Gael, Àlex, Anna</dd>
+                                        
+                                        <dt>Actors:</dt>
+                                        <dd>Mireia Oriol (Carla), Carlo Blanco (Gael), Jorge Motos (Àlex), Noelia Franco (Anna)</dd>
+                                    </div>
+                                </dl>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </section>
 
-            <!-- Sinopsis -->
-            <div class="row mt-4">
-                <div class="col-12" data-aos="fade-up" data-aos-delay="100">
-                    <div class="synopsis bg-light p-4 rounded-4 shadow-sm">
-                        <h2 class="fs-3 mb-3 text-primary">Sinopsi</h2>
-                        <p class="lead">
-                            <em>El que sabem</em> és la història de la Carla, una jove que viu un estiu de descobriments
-                            a la ciutat de València. Entre platges, festes i la recerca de la seua pròpia identitat,
-                            la protagonista establirà un vincle especial amb Gael i Àlex. Les vivències que
-                            comparteixen,
-                            el pes del passat i les emocions trobades dibuixen un retrat intimista de l'amor i l'amistat
-                            en la joventut. Amb una estètica vibrant, la pel·lícula explora els somnis, les pors i la
-                            voluntat de trobar el nostre lloc en el món.
-                        </p>
+                <!-- Sinopsis -->
+                <section class="row mt-4" aria-labelledby="synopsis-heading">
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="100">
+                        <div class="synopsis p-4 rounded-4 shadow-sm">
+                            <h2 class="fs-3 mb-3 text-primary" id="synopsis-heading">Sinopsi</h2>
+                            <p class="lead">
+                                <em>El que sabem</em> és la història de la Carla, una jove que viu un estiu de descobriments
+                                a la ciutat de València. Entre platges, festes i la recerca de la seua pròpia identitat,
+                                la protagonista establirà un vincle especial amb Gael i Àlex. Les vivències que
+                                comparteixen, el pes del passat i les emocions trobades dibuixen un retrat intimista de l'amor i l'amistat
+                                en la joventut. Amb una estètica vibrant, la pel·lícula explora els somnis, les pors i la
+                                voluntat de trobar el nostre lloc en el món.
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </section>
 
-
-            <!-- Críticas -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <h2 class="fs-3 mb-4 text-primary">Crítiques</h2>
-                    <div class="row g-4">
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="card border-0 shadow h-100">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-
-                                        <div>
-                                            <h5 class="mb-0">Joan Pons</h5>
-                                            <p class="text-muted mb-0">Revista Fotogramas</p>
+                <!-- Críticas -->
+                <section class="row mt-5" aria-labelledby="reviews-heading">
+                    <div class="col-12">
+                        <h2 class="fs-3 mb-4 text-primary" id="reviews-heading">Crítiques</h2>
+                        <div class="row g-4">
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                <article class="card border-0 shadow h-100 critic-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div>
+                                                <h3 class="h5 mb-0 critic-name">Joan Pons</h3>
+                                                <p class="text-muted mb-0 critic-source">Revista Fotogramas</p>
+                                            </div>
+                                        </div>
+                                        <blockquote class="fst-italic mb-3">
+                                            "Una proposta valenta que retrata amb autenticitat la joventut
+                                            valenciana actual, amb una fotografia esplèndida i actuacions molt naturals."
+                                        </blockquote>
+                                        <div class="rating-stars" aria-label="Valoració: 4.5 de 5 estrelles">
+                                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                            <i class="bi bi-star-half" aria-hidden="true"></i>
+                                            <span class="visually-hidden">4.5 de 5 estrelles</span>
                                         </div>
                                     </div>
-                                    <p class="fst-italic">"Una proposta valenta que retrata amb autenticitat la joventut
-                                        valenciana actual, amb una fotografia esplèndida i actuacions molt naturals."
-                                    </p>
-                                    <div class="text-warning">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </div>
-                                </div>
+                                </article>
                             </div>
-                        </div>
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                            <div class="card border-0 shadow h-100">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-
-                                        <div>
-                                            <h5 class="mb-0">Laura Martí</h5>
-                                            <p class="text-muted mb-0">Diari Levante</p>
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                <article class="card border-0 shadow h-100 critic-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div>
+                                                <h3 class="h5 mb-0 critic-name">Laura Martí</h3>
+                                                <p class="text-muted mb-0 critic-source">Diari Levante</p>
+                                            </div>
+                                        </div>
+                                        <blockquote class="fst-italic mb-3">
+                                            "Jordi Núñez demostra un talent excepcional per captar
+                                            l'essència de les relacions humanes en aquesta opera prima que no deixarà
+                                            indiferent a ningú."
+                                        </blockquote>
+                                        <div class="rating-stars" aria-label="Valoració: 4 de 5 estrelles">
+                                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                            <i class="bi bi-star" aria-hidden="true"></i>
+                                            <span class="visually-hidden">4 de 5 estrelles</span>
                                         </div>
                                     </div>
-                                    <p class="fst-italic">"Jordi Núñez demostra un talent excepcional per captar
-                                        l'essència de les relacions humanes en aquesta opera prima que no deixarà
-                                        indiferent a ningú."</p>
-                                    <div class="text-warning">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    </div>
-                                </div>
+                                </article>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </section>
 
-            <!-- Botón para volver -->
-            <div class="row mt-5">
-                <div class="col-12 text-center" data-aos="fade-up">
-                    <a href="./index.html" class="btn btn-primary btn-return px-4 py-2 shadow">
-                        <i class="bi bi-arrow-left me-2"></i>Tornar a l'inici
-                    </a>
+                <!-- Botón para volver -->
+                <div class="row mt-5">
+                    <div class="col-12 text-center" data-aos="fade-up">
+                        <a href="./index.html" class="btn btn-primary btn-return px-4 py-2 shadow">
+                            <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Tornar a l'inici
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </article>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="mt-5 pt-5">
+    <footer aria-labelledby="footer-heading" class="mt-5 pt-5">
         <div class="container">
+            <h2 id="footer-heading" class="visually-hidden">Informació del lloc web i contacte</h2>
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
                     <h3 class="h4">CinemaViu</h3>
                     <p>Associació Valenciana de Cinema que promou i dona suport al cinema en valencià a tota la
                         Comunitat.</p>
-                    <div class="social-icons">
-                        <a href="#" class="btn"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="btn"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="btn"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="btn"><i class="bi bi-youtube"></i></a>
+                    <div class="social-icons" aria-label="Xarxes socials">
+                        <a href="#" class="btn" aria-label="Facebook">
+                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="Twitter">
+                            <i class="bi bi-twitter-x" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="Instagram">
+                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="btn" aria-label="YouTube">
+                            <i class="bi bi-youtube" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="h4 text-black">Enllaços ràpids</h3>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><a href="./index.html" class="text-black text-decoration-none">
-                                <i class="bi bi-chevron-right me-2 text-black"></i>Inici
-                            </a></li>
-                        <li class="mb-3"><a href="./ranquin.html" class="text-black text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>Rànquing pel·lícules
-                            </a></li>
-                        <li class="mb-3"><a href="./professionals.html" class="text-black text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>Professionals
-                            </a></li>
-                        <li class="mb-3"><a href="./soci.html" class="text-black text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>Ser soci
-                            </a></li>
-                        <li><a href="diw.html" class="text-black text-decoration-none">
-                                <i class="bi bi-chevron-right me-2"></i>DIW
-                            </a></li>
-                    </ul>
+                    <h3 class="h4">Enllaços ràpids</h3>
+                    <nav aria-label="Enllaços ràpids del peu de pàgina">
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><a href="./index.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Inici
+                                </a></li>
+                            <li class="mb-3"><a href="./ranquin.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Rànquing pel·lícules
+                                </a></li>
+                            <li class="mb-3"><a href="./professionals.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Professionals
+                                </a></li>
+                            <li class="mb-3"><a href="./soci.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>Ser soci
+                                </a></li>
+                            <li><a href="diw.html" class="text-white text-decoration-none">
+                                    <i class="bi bi-chevron-right me-2" aria-hidden="true"></i>DIW
+                                </a></li>
+                        </ul>
+                    </nav>
                 </div>
 
                 <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
                     <h3 class="h4">Contacte</h3>
                     <ul class="list-unstyled">
                         <li class="mb-3 d-flex align-items-center">
-                            <i class="bi bi-geo-alt me-3"></i>
+                            <i class="bi bi-geo-alt me-3" aria-hidden="true"></i>
                             <span>Carrer del Cinema, 123, València</span>
                         </li>
                         <li class="mb-3 d-flex align-items-center">
-                            <i class="bi bi-envelope me-3"></i>
-                            <span>info@cinemaviu.val</span>
+                            <i class="bi bi-envelope me-3" aria-hidden="true"></i>
+                            <a href="mailto:info@cinemaviu.val" class="text-white">info@cinemaviu.val</a>
                         </li>
                         <li class="mb-3 d-flex align-items-center">
-                            <i class="bi bi-telephone me-3"></i>
-                            <span>(34) 963 123 456</span>
+                            <i class="bi bi-telephone me-3" aria-hidden="true"></i>
+                            <a href="tel:+34963123456" class="text-white">(34) 963 123 456</a>
                         </li>
                     </ul>
                     <!-- Mini formulario de contacto rápido -->
                     <div class="mt-4">
+                        <label for="quick-message" class="form-label visually-hidden">Missatge ràpid</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Missatge ràpid">
-                            <button class="btn btn-primary" type="button">
-                                <i class="bi bi-send"></i>
+                            <input type="text" class="form-control" id="quick-message" placeholder="Missatge ràpid" aria-label="Missatge ràpid">
+                            <button class="btn btn-primary" type="button" aria-label="Enviar missatge">
+                                <i class="bi bi-send" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -469,11 +647,7 @@
                 <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item"><a href="#"
-                                class="text-white-50 text-decoration-none small">Política de Privacitat</a></li>
-                        <li class="list-inline-item mx-3"><a href="#"
-                                class="text-white-50 text-decoration-none small">Termes d'Ús</a></li>
-                        <li class="list-inline-item"><a href="#"
-                                class="text-white-50 text-decoration-none small">Cookies</a></li>
+                                class="text-white-50 text-decoration-underline small">Cookies</a></li>
                     </ul>
                 </div>
             </div>
@@ -481,11 +655,8 @@
     </footer>
 
     <!-- Botón Volver Arriba -->
-    <a href="#"
-        class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 d-flex align-items-center justify-content-center shadow"
-        id="backToTop"
-        style="width: 45px; height: 45px; z-index: 1030; opacity: 0; visibility: hidden; transition: all 0.3s ease;">
-        <i class="bi bi-arrow-up"></i>
+    <a href="#" class="btn rounded-circle shadow" id="backToTop" aria-label="Tornar a dalt">
+        <i class="bi bi-arrow-up" aria-hidden="true"></i>
     </a>
 
     <!-- Bootstrap JS Bundle with Popper -->
@@ -501,7 +672,8 @@
             duration: 800,
             easing: 'ease-in-out',
             once: true,
-            mirror: false
+            mirror: false,
+            disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches // Respeta preferencia de movimiento reducido
         });
 
         // Cambiar navbar al hacer scroll
@@ -518,9 +690,11 @@
             // Mostrar/ocultar botón volver arriba
             const backToTop = document.getElementById('backToTop');
             if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
                 backToTop.style.opacity = '1';
                 backToTop.style.visibility = 'visible';
             } else {
+                backToTop.classList.remove('visible');
                 backToTop.style.opacity = '0';
                 backToTop.style.visibility = 'hidden';
             }
@@ -539,8 +713,12 @@
                 if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
                     });
+                    
+                    // Establecer el foco en el elemento objetivo para accesibilidad
+                    targetElement.setAttribute('tabindex', '-1');
+                    targetElement.focus();
                 }
             });
         });
@@ -550,9 +728,67 @@
             e.preventDefault();
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth'
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+            });
+            
+            // Establecer el foco en el primer elemento enfocable
+            document.querySelector('a.skip-link').focus();
+        });
+        
+        // Mejorar accesibilidad del teclado para la navegación
+        const focusableElements = document.querySelectorAll(
+            'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        focusableElements.forEach(element => {
+            element.addEventListener('keydown', function(e) {
+                // Activar elementos con la tecla Enter o Espacio
+                if (e.key === 'Enter' || e.key === ' ') {
+                    if (element.tagName.toLowerCase() !== 'input' && 
+                        element.tagName.toLowerCase() !== 'textarea') {
+                        e.preventDefault();
+                        element.click();
+                    }
+                }
             });
         });
+        
+        // Manejo de video accesible
+        const video = document.querySelector('video');
+        if (video) {
+            // Añadir controles de teclado para el video
+            video.addEventListener('keydown', function(e) {
+                // Espacio para reproducir/pausar
+                if (e.key === ' ' || e.key === 'k') {
+                    e.preventDefault();
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                }
+                // Flecha izquierda para retroceder 5 segundos
+                else if (e.key === 'ArrowLeft') {
+                    video.currentTime = Math.max(0, video.currentTime - 5);
+                }
+                // Flecha derecha para avanzar 5 segundos
+                else if (e.key === 'ArrowRight') {
+                    video.currentTime = Math.min(video.duration, video.currentTime + 5);
+                }
+                // Flecha arriba para subir volumen
+                else if (e.key === 'ArrowUp') {
+                    video.volume = Math.min(1, video.volume + 0.1);
+                }
+                // Flecha abajo para bajar volumen
+                else if (e.key === 'ArrowDown') {
+                    video.volume = Math.max(0, video.volume - 0.1);
+                }
+                // M para silenciar
+                else if (e.key === 'm') {
+                    video.muted = !video.muted;
+                }
+            });
+        }
     </script>
 </body>
 
