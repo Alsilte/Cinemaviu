@@ -48,6 +48,9 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(to bottom, #ffffff 0%, #fff5f5 25%, #ffc9c9 75%, #ff8787 100%);
             background-attachment: fixed;
+            max-width: 100%;
+            overflow-x: hidden !important;
+            position: relative;
         }
 
         h1,
@@ -331,42 +334,95 @@
             }
         }
 
+        /* Ajustes para móviles */
         @media (max-width: 767.98px) {
-            .rank-badge {
-                min-width: 50px;
-                font-size: 1.25rem;
-            }
-
-            .movie-content {
-                padding: 0.75rem;
-            }
-
-            .movie-title {
-                font-size: 1.25rem;
-            }
-
-            .movie-poster-wrapper {
-                width: 70px;
-            }
-           
+        /* Centrar el contenedor principal */
+        .container, .ranking-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
         }
+        
+        /* Centrar cada columna */
+        .col-12 {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        /* Ajustar ancho completo para el ítem */
+        .ranking-item {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+        }
+        
+        /* Contenedor de póster centrado */
+        .movie-poster-wrapper {
+            width: 100% !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+        
+        /* Imagen centrada y visible completa */
+        .movie-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+        
+        /* Contenido de texto centrado */
+        .movie-content {
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        /* Titulo centrado */
+        .movie-title {
+            text-align: center;
+            width: 100%;
+        }
+        
+        /* Descripción centrada */
+        .movie-description {
+            text-align: center;
+            width: 100%;
+        }
+        
+        /* Centrar el botón CTA */
+        .text-center .btn {
+            display: inline-block;
+            margin: 0 auto;
+        }
+    }
 
+        /* Ajustes para pantallas muy pequeñas */
         @media (max-width: 575.98px) {
             .movie-content {
-                padding: 0.5rem;
+                padding: 1rem;
             }
 
             .movie-title {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+            }
+
+            .movie-description {
+                font-size: 0.85rem;
             }
 
             .movie-poster-wrapper {
-                width: 60px;
-            }
-
-            .movie-badge {
-                font-size: 0.65rem;
-                padding: 0.15rem 0.5rem;
+                aspect-ratio: 3/2;
             }
         }
     </style>
@@ -692,7 +748,7 @@
         </div>
     </footer>
 
-   
+
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -710,7 +766,36 @@
             mirror: false
         });
 
-      
+        document.addEventListener('DOMContentLoaded', function () {
+            // Prevenir scroll horizontal
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
+
+            // Deshabilitar AOS en móviles
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('[data-aos]').forEach(function (element) {
+                    element.removeAttribute('data-aos');
+                    element.removeAttribute('data-aos-delay');
+                    element.removeAttribute('data-aos-duration');
+                    element.style.opacity = '1';
+                });
+
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({ disable: true });
+                }
+            }
+        });
+
+        // Mantener el control del scroll horizontal
+        window.addEventListener('resize', function () {
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
+        });
+        // Evento para asegurar que el overflow-x: hidden se mantiene en resize
+        window.addEventListener('resize', function () {
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
+        });
 
         // Smooth scroll para enlaces internos
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -731,7 +816,7 @@
             });
         });
 
-        
+
     </script>
 </body>
 

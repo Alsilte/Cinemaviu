@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="El que sabem - Pel·lícula sobre la història de la Carla, una jove que viu un estiu de descobriments a València">
+    <meta name="description"
+        content="El que sabem - Pel·lícula sobre la història de la Carla, una jove que viu un estiu de descobriments a València">
     <title>El que sabem - CinemaViu</title>
 
     <!-- Bootstrap CSS -->
@@ -49,37 +50,32 @@
             background: linear-gradient(to bottom, #ffffff 0%, #fff5f5 25%, #ffc9c9 75%, #ff8787 100%);
             background-attachment: fixed;
             line-height: 1.6;
-            color: #333; /* Asegurar suficiente contraste */
+            color: #333;
+            /* Asegurar suficiente contraste */
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'DM Serif Display', serif;
             margin-bottom: 0.75rem;
         }
 
         /* Estilos para la accesibilidad del teclado */
-        a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:focus {
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus,
+        [tabindex]:focus {
             outline: 3px solid var(--primary);
             outline-offset: 2px;
         }
 
-        /* Enlace para saltar al contenido principal */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 8px;
-            z-index: 2000;
-            text-decoration: none;
-            transition: top 0.3s ease;
-        }
-
-        .skip-link:focus {
-            top: 0;
-            outline: none;
-        }
+       
 
         /* Visually hidden class para lectores de pantalla */
         .visually-hidden {
@@ -97,10 +93,11 @@
         .btn-primary {
             background-color: var(--primary);
             border-color: var(--primary);
-            color: white; /* Garantizar contraste */
+            color: white;
+            /* Garantizar contraste */
         }
 
-        .btn-primary:hover, 
+        .btn-primary:hover,
         .btn-primary:focus {
             background-color: var(--primary-dark);
             border-color: var(--primary-dark);
@@ -108,11 +105,13 @@
         }
 
         .text-primary {
-            color: var(--primary-dark) !important; /* Oscurecido para mejor contraste */
+            color: var(--primary-dark) !important;
+            /* Oscurecido para mejor contraste */
         }
 
         .movie-title {
-            color: var(--primary-dark); /* Oscurecido para mejor contraste */
+            color: var(--primary-dark);
+            /* Oscurecido para mejor contraste */
         }
 
         .movie-poster {
@@ -136,7 +135,8 @@
 
         .synopsis {
             border-radius: 1rem;
-            background-color: #f8f9fa; /* Asegurar buen contraste */
+            background-color: #f8f9fa;
+            /* Asegurar buen contraste */
         }
 
         .btn-return {
@@ -157,32 +157,37 @@
             text-decoration: underline;
             font-weight: 500;
         }
-        
+
         .breadcrumb-item a:hover,
         .breadcrumb-item a:focus {
-            color: #9a1c1c !important; /* Más oscuro para mejor contraste */
+            color: #9a1c1c !important;
+            /* Más oscuro para mejor contraste */
             text-decoration: underline;
         }
-        
+
         .breadcrumb-item.active {
-            color: #5a5a5a; /* Gris oscuro para mejor contraste */
+            color: #5a5a5a;
+            /* Gris oscuro para mejor contraste */
             font-weight: 500;
         }
 
         /* Navbar styling */
         .navbar {
-            background: rgba(255, 255, 255, 0.9); /* Aumentado para contraste */
+            background: rgba(255, 255, 255, 0.9);
+            /* Aumentado para contraste */
             backdrop-filter: blur(10px);
         }
 
         .navbar.scrolled {
-            background: rgba(201, 42, 42, 0.95); /* Aumentado para contraste */
+            background: rgba(201, 42, 42, 0.95);
+            /* Aumentado para contraste */
         }
 
         .navbar-brand {
             font-family: 'DM Serif Display', serif;
             font-weight: 700;
-            color: var(--primary-dark); /* Oscurecido para mejorar contraste */
+            color: var(--primary-dark);
+            /* Oscurecido para mejorar contraste */
             font-size: 1.5rem;
         }
 
@@ -200,7 +205,8 @@
             content: '';
             position: absolute;
             width: 0;
-            height: 3px; /* Aumentado para visibilidad */
+            height: 3px;
+            /* Aumentado para visibilidad */
             bottom: 0;
             left: 0;
             background-color: var(--primary);
@@ -244,12 +250,14 @@
         }
 
         .critic-source {
-            color: #555; /* Oscurecido para mejor contraste */
+            color: #555;
+            /* Oscurecido para mejor contraste */
         }
 
         /* Rating stars con mejor contraste */
         .rating-stars {
-            color: #E67700; /* Amarillo más oscuro para mejor contraste */
+            color: #E67700;
+            /* Amarillo más oscuro para mejor contraste */
         }
 
         /* Footer styling */
@@ -361,7 +369,11 @@
 
         /* Modo de alto contraste */
         @media (forced-colors: active) {
-            .card, .btn, .nav-link, .synopsis {
+
+            .card,
+            .btn,
+            .nav-link,
+            .synopsis {
                 border: 1px solid;
             }
         }
@@ -369,11 +381,10 @@
 </head>
 
 <body>
-    <!-- Enlace para saltar al contenido principal (para accesibilidad) -->
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" id="mainNav" aria-label="Navegación principal">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" id="mainNav"
+        aria-label="Navegación principal">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="./index.html" data-aos="fade-right"
                 data-aos-duration="1000">
@@ -381,7 +392,7 @@
                 CinemaViu
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar/ocultar menú de navegación">
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar/ocultar menú de navegación">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -430,19 +441,25 @@
                     <!-- Poster de la película -->
                     <div class="col-12 col-md-6" data-aos="fade-right" data-aos-delay="100">
                         <figure>
-                            <img src="./img/elquesabem.webp" alt="Cartell de la pel·lícula 'El que sabem', mostra als protagonistes Carla i Gael a la platja de València"
-                                class="movie-poster img-fluid w-100 h-auto object-fit-contain" style="max-height: 500px;">
+                            <img src="./img/elquesabem.webp"
+                                alt="Cartell de la pel·lícula 'El que sabem', mostra als protagonistes Carla i Gael a la platja de València"
+                                class="movie-poster img-fluid w-100 h-auto object-fit-contain"
+                                style="max-height: 500px;">
                         </figure>
                     </div>
 
                     <!-- Video/trailer -->
                     <div class="col-12 col-md-6" data-aos="fade-left" data-aos-delay="200">
                         <figure>
-                            <video controls class="movie-video w-100 mb-3" aria-label="Tràiler de la pel·lícula 'El que sabem'" poster="./img/elquesabem.webp">
+                            <video controls class="movie-video w-100 mb-3"
+                                aria-label="Tràiler de la pel·lícula 'El que sabem'" poster="./img/elquesabem.webp">
                                 <source src="./videos/elquesabem.mp4" type="video/mp4">
-                                <p>El teu navegador no admet la reproducció de vídeos. Pots <a href="./videos/elquesabem.mp4">descarregar el vídeo</a> per veure'l al teu dispositiu.</p>
+                                <p>El teu navegador no admet la reproducció de vídeos. Pots <a
+                                        href="./videos/elquesabem.mp4">descarregar el vídeo</a> per veure'l al teu
+                                    dispositiu.</p>
                             </video>
-                            <figcaption class="visually-hidden">Tràiler oficial de la pel·lícula "El que sabem"</figcaption>
+                            <figcaption class="visually-hidden">Tràiler oficial de la pel·lícula "El que sabem"
+                            </figcaption>
                         </figure>
                     </div>
                 </div>
@@ -457,16 +474,17 @@
                                     <div class="col-md-6">
                                         <dt>Any:</dt>
                                         <dd>2022</dd>
-                                        
+
                                         <dt>Director:</dt>
                                         <dd>Jordi Núñez</dd>
                                     </div>
                                     <div class="col-md-6">
                                         <dt>Personatges principals:</dt>
                                         <dd>Carla, Gael, Àlex, Anna</dd>
-                                        
+
                                         <dt>Actors:</dt>
-                                        <dd>Mireia Oriol (Carla), Carlo Blanco (Gael), Jorge Motos (Àlex), Noelia Franco (Anna)</dd>
+                                        <dd>Mireia Oriol (Carla), Carlo Blanco (Gael), Jorge Motos (Àlex), Noelia Franco
+                                            (Anna)</dd>
                                     </div>
                                 </dl>
                             </div>
@@ -480,11 +498,14 @@
                         <div class="synopsis p-4 rounded-4 shadow-sm">
                             <h2 class="fs-3 mb-3 text-primary" id="synopsis-heading">Sinopsi</h2>
                             <p class="lead">
-                                <em>El que sabem</em> és la història de la Carla, una jove que viu un estiu de descobriments
+                                <em>El que sabem</em> és la història de la Carla, una jove que viu un estiu de
+                                descobriments
                                 a la ciutat de València. Entre platges, festes i la recerca de la seua pròpia identitat,
                                 la protagonista establirà un vincle especial amb Gael i Àlex. Les vivències que
-                                comparteixen, el pes del passat i les emocions trobades dibuixen un retrat intimista de l'amor i l'amistat
-                                en la joventut. Amb una estètica vibrant, la pel·lícula explora els somnis, les pors i la
+                                comparteixen, el pes del passat i les emocions trobades dibuixen un retrat intimista de
+                                l'amor i l'amistat
+                                en la joventut. Amb una estètica vibrant, la pel·lícula explora els somnis, les pors i
+                                la
                                 voluntat de trobar el nostre lloc en el món.
                             </p>
                         </div>
@@ -507,7 +528,8 @@
                                         </div>
                                         <blockquote class="fst-italic mb-3">
                                             "Una proposta valenta que retrata amb autenticitat la joventut
-                                            valenciana actual, amb una fotografia esplèndida i actuacions molt naturals."
+                                            valenciana actual, amb una fotografia esplèndida i actuacions molt
+                                            naturals."
                                         </blockquote>
                                         <div class="rating-stars" aria-label="Valoració: 4.5 de 5 estrelles">
                                             <i class="bi bi-star-fill" aria-hidden="true"></i>
@@ -629,7 +651,8 @@
                     <div class="mt-4">
                         <label for="quick-message" class="form-label visually-hidden">Missatge ràpid</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="quick-message" placeholder="Missatge ràpid" aria-label="Missatge ràpid">
+                            <input type="text" class="form-control" id="quick-message" placeholder="Missatge ràpid"
+                                aria-label="Missatge ràpid">
                             <button class="btn btn-primary" type="button" aria-label="Enviar missatge">
                                 <i class="bi bi-send" aria-hidden="true"></i>
                             </button>
@@ -676,6 +699,26 @@
             disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches // Respeta preferencia de movimiento reducido
         });
 
+        document.addEventListener('DOMContentLoaded', function () {
+            // Prevenir scroll horizontal
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
+
+            // Deshabilitar AOS en móviles
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('[data-aos]').forEach(function (element) {
+                    element.removeAttribute('data-aos');
+                    element.removeAttribute('data-aos-delay');
+                    element.removeAttribute('data-aos-duration');
+                    element.style.opacity = '1';
+                });
+
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({ disable: true });
+                }
+            }
+        });
+
         // Cambiar navbar al hacer scroll
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('mainNav');
@@ -715,7 +758,7 @@
                         top: targetElement.offsetTop - 80,
                         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
                     });
-                    
+
                     // Establecer el foco en el elemento objetivo para accesibilidad
                     targetElement.setAttribute('tabindex', '-1');
                     targetElement.focus();
@@ -730,21 +773,20 @@
                 top: 0,
                 behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
             });
+
             
-            // Establecer el foco en el primer elemento enfocable
-            document.querySelector('a.skip-link').focus();
         });
-        
+
         // Mejorar accesibilidad del teclado para la navegación
         const focusableElements = document.querySelectorAll(
             'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
         );
-        
+
         focusableElements.forEach(element => {
-            element.addEventListener('keydown', function(e) {
+            element.addEventListener('keydown', function (e) {
                 // Activar elementos con la tecla Enter o Espacio
                 if (e.key === 'Enter' || e.key === ' ') {
-                    if (element.tagName.toLowerCase() !== 'input' && 
+                    if (element.tagName.toLowerCase() !== 'input' &&
                         element.tagName.toLowerCase() !== 'textarea') {
                         e.preventDefault();
                         element.click();
@@ -752,12 +794,12 @@
                 }
             });
         });
-        
+
         // Manejo de video accesible
         const video = document.querySelector('video');
         if (video) {
             // Añadir controles de teclado para el video
-            video.addEventListener('keydown', function(e) {
+            video.addEventListener('keydown', function (e) {
                 // Espacio para reproducir/pausar
                 if (e.key === ' ' || e.key === 'k') {
                     e.preventDefault();

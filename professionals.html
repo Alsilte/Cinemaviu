@@ -835,7 +835,25 @@
             once: true,
             mirror: false
         });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Prevenir scroll horizontal
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
 
+            // Deshabilitar AOS en móviles
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('[data-aos]').forEach(function (element) {
+                    element.removeAttribute('data-aos');
+                    element.removeAttribute('data-aos-delay');
+                    element.removeAttribute('data-aos-duration');
+                    element.style.opacity = '1';
+                });
+
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({ disable: true });
+                }
+            }
+        });
         // Cambiar navbar al hacer scroll
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('mainNav');
