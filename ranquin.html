@@ -91,14 +91,12 @@
             background-color: var(--primary) !important;
         }
 
-        /* Navbar personalizado */
+        /* Agregar estos estilos a tu sección CSS existente */
+
+        /* Navbar */
         .navbar {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-        }
-
-        .navbar-nav .nav-item {
-            margin-right: 1.5rem;
         }
 
         .navbar.scrolled {
@@ -317,6 +315,7 @@
 
         /* Responsive */
         @media (max-width: 991.98px) {
+
             .navbar-collapse {
                 background-color: rgba(255, 255, 255, 0.95);
                 border-radius: 1rem;
@@ -336,76 +335,78 @@
 
         /* Ajustes para móviles */
         @media (max-width: 767.98px) {
-        /* Centrar el contenedor principal */
-        .container, .ranking-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
+
+            /* Centrar el contenedor principal */
+            .container,
+            .ranking-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            /* Centrar cada columna */
+            .col-12 {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                max-width: 450px;
+            }
+
+            /* Ajustar ancho completo para el ítem */
+            .ranking-item {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-left: auto;
+                margin-right: auto;
+                overflow: hidden;
+            }
+
+            /* Contenedor de póster centrado */
+            .movie-poster-wrapper {
+                width: 100% !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                background-color: #f8f9fa;
+            }
+
+            /* Imagen centrada y visible completa */
+            .movie-poster {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            /* Contenido de texto centrado */
+            .movie-content {
+                width: 100%;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            /* Titulo centrado */
+            .movie-title {
+                text-align: center;
+                width: 100%;
+            }
+
+            /* Descripción centrada */
+            .movie-description {
+                text-align: center;
+                width: 100%;
+            }
+
+            /* Centrar el botón CTA */
+            .text-center .btn {
+                display: inline-block;
+                margin: 0 auto;
+            }
         }
-        
-        /* Centrar cada columna */
-        .col-12 {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            max-width: 450px;
-        }
-        
-        /* Ajustar ancho completo para el ítem */
-        .ranking-item {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: auto;
-            margin-right: auto;
-            overflow: hidden;
-        }
-        
-        /* Contenedor de póster centrado */
-        .movie-poster-wrapper {
-            width: 100% !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background-color: #f8f9fa;
-        }
-        
-        /* Imagen centrada y visible completa */
-        .movie-poster {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-        }
-        
-        /* Contenido de texto centrado */
-        .movie-content {
-            width: 100%;
-            padding: 1rem;
-            text-align: center;
-        }
-        
-        /* Titulo centrado */
-        .movie-title {
-            text-align: center;
-            width: 100%;
-        }
-        
-        /* Descripción centrada */
-        .movie-description {
-            text-align: center;
-            width: 100%;
-        }
-        
-        /* Centrar el botón CTA */
-        .text-center .btn {
-            display: inline-block;
-            margin: 0 auto;
-        }
-    }
 
         /* Ajustes para pantallas muy pequeñas */
         @media (max-width: 575.98px) {
@@ -748,6 +749,13 @@
         </div>
     </footer>
 
+    <a href="#"
+        class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 d-flex align-items-center justify-content-center shadow"
+        id="backToTop"
+        style="width: 45px; height: 45px; z-index: 1030; opacity: 0; visibility: hidden; transition: all 0.3s ease;">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
 
 
     <!-- Bootstrap JS Bundle with Popper -->
@@ -759,64 +767,82 @@
     <!-- Custom JS -->
     <script>
         // Inicializar AOS animations
-        AOS.init({
-            duration: 400,
-            easing: 'ease-in-out',
-            once: true,
-            mirror: false
-        });
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+    });
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        // Prevenir scroll horizontal
+        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden';
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Prevenir scroll horizontal
-            document.documentElement.style.overflowX = 'hidden';
-            document.body.style.overflowX = 'hidden';
+        // Deshabilitar AOS en móviles
+        if (window.innerWidth < 768) {
+            document.querySelectorAll('[data-aos]').forEach(function (element) {
+                element.removeAttribute('data-aos');
+                element.removeAttribute('data-aos-delay');
+                element.removeAttribute('data-aos-duration');
+                element.style.opacity = '1';
+            });
 
-            // Deshabilitar AOS en móviles
-            if (window.innerWidth < 768) {
-                document.querySelectorAll('[data-aos]').forEach(function (element) {
-                    element.removeAttribute('data-aos');
-                    element.removeAttribute('data-aos-delay');
-                    element.removeAttribute('data-aos-duration');
-                    element.style.opacity = '1';
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ disable: true });
+            }
+        }
+    });
+    
+    // Cambiar navbar al hacer scroll
+    window.addEventListener('scroll', function () {
+        const navbar = document.getElementById('mainNav');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled', 'navbar-dark');
+            navbar.classList.remove('navbar-light');
+        } else {
+            navbar.classList.remove('scrolled', 'navbar-dark');
+            navbar.classList.add('navbar-light');
+        }
+
+        // Mostrar/ocultar botón volver arriba
+        const backToTop = document.getElementById('backToTop');
+        if (window.scrollY > 300) {
+            backToTop.style.opacity = '1';
+            backToTop.style.visibility = 'visible';
+        } else {
+            backToTop.style.opacity = '0';
+            backToTop.style.visibility = 'hidden';
+        }
+    });
+
+    // Smooth scroll para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            if (this.getAttribute('href') === '#') return;
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
                 });
-
-                if (typeof AOS !== 'undefined') {
-                    AOS.init({ disable: true });
-                }
             }
         });
+    });
 
-        // Mantener el control del scroll horizontal
-        window.addEventListener('resize', function () {
-            document.documentElement.style.overflowX = 'hidden';
-            document.body.style.overflowX = 'hidden';
+    // Funcionalidad para el botón de volver arriba
+    document.getElementById('backToTop').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-        // Evento para asegurar que el overflow-x: hidden se mantiene en resize
-        window.addEventListener('resize', function () {
-            document.documentElement.style.overflowX = 'hidden';
-            document.body.style.overflowX = 'hidden';
-        });
-
-        // Smooth scroll para enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                if (this.getAttribute('href') === '#') return;
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-
+    });
     </script>
 </body>
 
